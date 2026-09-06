@@ -414,6 +414,24 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .aff__d{color:var(--fg-muted);font-size:.88rem;line-height:1.6}
 @media (max-width:1000px){.aff{grid-template-columns:1fr}}
 
+
+/* Programa de afiliados: pasos y reglas */
+.aff__step{position:relative}
+.aff__step .aff__k{display:flex;align-items:center;gap:10px}
+.aff__step .aff__k::before{content:attr(data-n);font-family:var(--display);font-weight:600;
+  font-size:1.05rem;letter-spacing:-.03em;color:var(--fg);
+  background:var(--surface-2);border:1px solid var(--line);border-radius:9px;
+  width:30px;height:30px;display:grid;place-items:center;flex:none}
+.aff__t{font-weight:500;font-size:1.05rem;letter-spacing:-.02em;line-height:1.3}
+.rules{margin-top:42px;display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;
+  padding-top:26px;border-top:1px solid var(--line)}
+.rules h3{grid-column:1/-1;font-family:var(--mono);font-size:.63rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--fg-dim);font-weight:400;margin-bottom:2px}
+.rules p{color:var(--fg-muted);font-size:.88rem;line-height:1.6;display:flex;gap:11px}
+.rules p::before{content:'';width:5px;height:5px;border-radius:50%;flex:none;margin-top:.6em;
+  background:linear-gradient(120deg,var(--iris-1),var(--iris-4))}
+@media (max-width:1000px){.rules{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -697,26 +715,44 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   <div class="wrap sec__head">
     <div>
       <p class="eyebrow" data-anim>Programa de afiliados</p>
-      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>Recomiende un negocio y reciba ingresos cada mes</span></h2>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>Sin jefe, sin horario y sin invertir</span></h2>
     </div>
     <p class="lede reveal" style="--i:2" data-anim>
-      Si conoce un negocio al que este servicio le puede servir, preséntenoslo.
-      Recibe una comisión cuando queda instalado y una comisión mensual mientras
-      el cliente continúe con nosotros. No necesita vender ni explicar nada técnico.
+      Usted recomienda. Nosotros instalamos y damos el soporte.
+      Y usted cobra cada vez que el cliente paga, mes tras mes,
+      mientras siga con nosotros.
     </p>
   </div>
 
   <div class="wrap">
     <div class="aff">
+      <div class="aff__c aff__step iris-border reveal" data-anim>
+        <span class="aff__k" data-n="1">Se inscribe</span>
+        <h3 class="aff__t">Recibe su material en el mismo día</h3>
+        <p class="aff__d">La inscripción es gratuita. Le entregamos su código de referido, un video de demostración y un mensaje listo para reenviar.</p>
+      </div>
+      <div class="aff__c aff__step iris-border reveal" style="--i:1" data-anim>
+        <span class="aff__k" data-n="2">Lo muestra</span>
+        <h3 class="aff__t">Le enseña el demo a un negocio</h3>
+        <p class="aff__d">Despachos de abogados, veterinarias, consultorios, salones de belleza. Cualquier negocio que atienda clientes por WhatsApp.</p>
+      </div>
+      <div class="aff__c aff__step iris-border reveal" style="--i:2" data-anim>
+        <span class="aff__k" data-n="3">Cobra</span>
+        <h3 class="aff__t">El negocio paga y usted cobra</h3>
+        <p class="aff__d">Su comisión sale del primer pago. Y cada mes que el cliente siga pagando, usted vuelve a cobrar.</p>
+      </div>
+    </div>
+
+    <div class="aff" style="margin-top:18px">
       <div class="aff__c iris-border reveal" data-anim>
-        <span class="aff__k">Al quedar instalado</span>
+        <span class="aff__k">Al primer pago del cliente</span>
         <div class="aff__n">$<span data-count="70" data-suffix=".000">0</span></div>
-        <p class="aff__d">Pago único cuando el cliente queda operando, sin importar el plan que contrate.</p>
+        <p class="aff__d">Su comisión por haber traído al cliente. Se paga una sola vez, con cualquiera de los dos planes.</p>
       </div>
       <div class="aff__c iris-border reveal" style="--i:1" data-anim>
         <span class="aff__k">Cada mes · plan Básico</span>
         <div class="aff__n">$<span data-count="50" data-suffix=".000">0</span></div>
-        <p class="aff__d">Mientras el cliente siga activo, todos los meses, sin límite de tiempo.</p>
+        <p class="aff__d">Mientras ese cliente siga pagando, sin límite de tiempo. No tiene que volver a hacer nada.</p>
       </div>
       <div class="aff__c iris-border reveal" style="--i:2" data-anim>
         <span class="aff__k">Cada mes · plan Pro</span>
@@ -724,10 +760,26 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <p class="aff__d">Si el cliente contrata el plan Pro, su comisión mensual sube automáticamente.</p>
       </div>
     </div>
+
+    <div class="rules reveal" data-anim>
+      <h3>Condiciones</h3>
+      <p>La comisión se paga únicamente por clientes que ya hicieron su pago.</p>
+      <p>Se vende con nuestro material y con nuestros precios, sin modificarlos.</p>
+      <p>No prometa funciones que el asistente no tiene: nosotros respondemos por lo que sí hace.</p>
+      <p>Es una comisión por referidos, no una relación laboral.</p>
+    </div>
+
     <p class="note reveal" data-anim>
-      Tres clientes en plan Pro equivalen a $225.000 COP mensuales de ingreso recurrente.<br>
-      Nosotros nos encargamos de la llamada, la instalación y el soporte.
+      Tres clientes en plan Pro son $225.000 COP mensuales de ingreso recurrente.<br>
+      Nosotros hacemos la llamada, la instalación y el soporte.
     </p>
+
+    <div class="reveal" style="margin-top:30px" data-anim>
+      <a href="#contacto" class="btn" data-magnet data-cursor>Quiero inscribirme
+        <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
