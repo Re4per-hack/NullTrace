@@ -58,7 +58,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
 
 /* Tipografía: minúscula, enorme, muy apretada — como la referencia */
-.h-xl,.h-lg,.h-md{font-family:var(--display);letter-spacing:-.045em;text-transform:lowercase}
+.h-xl,.h-lg,.h-md{font-family:var(--display);letter-spacing:-.045em}
 .h-xl{font-weight:600;font-variation-settings:'wdth' 100;font-size:clamp(3.4rem,12.5vw,10.5rem);line-height:.84}
 .h-lg{font-weight:600;font-size:clamp(2.3rem,6vw,4.6rem);line-height:.92}
 .h-md{font-weight:500;font-size:clamp(1.35rem,2.3vw,1.85rem);line-height:1.06;letter-spacing:-.03em}
@@ -290,7 +290,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   border-bottom:1px solid var(--line);align-items:start}
 .step:last-child{border-bottom:0}
 .step__n{font-family:var(--mono);font-size:.72rem;color:var(--fg-dim);letter-spacing:.16em;padding-top:7px}
-.step__t{font-weight:500;font-size:clamp(1.2rem,2.1vw,1.6rem);letter-spacing:-.03em;text-transform:lowercase}
+.step__t{font-weight:500;font-size:clamp(1.2rem,2.1vw,1.6rem);letter-spacing:-.03em}
 .step__d{color:var(--fg-muted);margin-top:8px;max-width:58ch;font-size:.93rem}
 .step__meta{font-family:var(--mono);font-size:.68rem;margin-top:11px;letter-spacing:.1em;color:var(--iris-4)}
 
@@ -303,9 +303,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .plan__badge{position:absolute;top:-10px;left:28px;font-family:var(--mono);font-size:.6rem;
   letter-spacing:.16em;padding:5px 12px;border-radius:99px;color:#000;
   background:linear-gradient(90deg,var(--iris-3),var(--iris-2))}
-.plan__name{font-weight:500;font-size:1.2rem;letter-spacing:-.03em;text-transform:lowercase}
-.plan__p{font-weight:600;font-size:2.3rem;letter-spacing:-.05em;line-height:1}
-.plan__p small{font-family:var(--mono);font-size:.7rem;font-weight:400;color:var(--fg-dim);letter-spacing:.06em}
+.plan__name{font-weight:500;font-size:1.2rem;letter-spacing:-.03em}
+.plan__p{font-weight:600;font-size:clamp(1.7rem,2.4vw,2.15rem);letter-spacing:-.05em;line-height:1.05}
+.plan__p small{display:block;margin-top:8px;font-family:var(--mono);font-size:.66rem;font-weight:400;color:var(--fg-dim);letter-spacing:.1em}
 .plan__d{color:var(--fg-muted);font-size:.89rem;line-height:1.6}
 .plan ul{list-style:none;display:flex;flex-direction:column;gap:9px;font-size:.86rem;margin-top:4px}
 .plan li{display:flex;gap:10px;align-items:flex-start;color:var(--fg-muted)}
@@ -402,7 +402,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 /* ============================================================
    INSTALACION Y AFILIADOS
    ============================================================ */
-.plan--once .plan__p{font-size:1.9rem}
+.plan--once .plan__p{font-size:clamp(1.6rem,2.2vw,1.95rem)}
 .note{margin-top:26px;font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;
   color:var(--fg-dim);line-height:1.9}
 .aff{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
@@ -432,13 +432,13 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   <div class="wrap nav__in">
     <a href="#" class="logo pill" data-cursor><span class="logo__mark"></span>nulltrace</a>
     <nav class="nav__links pill" id="navLinks">
-      <a href="#que-hace">qué hace</a>
-      <a href="#conversacion">conversación</a>
-      <a href="#alta">puesta en marcha</a>
-      <a href="#planes">planes</a>
-      <a href="#afiliados">afiliados</a>
+      <a href="#que-hace">Qué hace</a>
+      <a href="#conversacion">Conversación</a>
+      <a href="#alta">Puesta en marcha</a>
+      <a href="#planes">Planes</a>
+      <a href="#afiliados">Afiliados</a>
     </nav>
-    <a href="#contacto" class="btn nav__cta" data-magnet data-cursor>quiero uno</a>
+    <a href="#contacto" class="btn nav__cta" data-magnet data-cursor>Solicitar demostración</a>
     <button class="nav__toggle pill" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
   </div>
 </header>
@@ -451,34 +451,34 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
   <div class="float f1" data-parallax="0.12">
     <div class="float__n">24/7</div>
-    <div class="float__l">sin turnos ni festivos</div>
+    <div class="float__l">Sin turnos ni festivos</div>
   </div>
   <div class="float f2" data-parallax="0.2">
-    <div class="float__n">tu número</div>
-    <div class="float__l">el mismo de siempre</div>
+    <div class="float__n">Su número</div>
+    <div class="float__l">El mismo que ya usa</div>
   </div>
   <div class="float f3" data-parallax="0.08">
-    <div class="float__n">tu agenda</div>
-    <div class="float__l">citas en tu calendario</div>
+    <div class="float__n">Su agenda</div>
+    <div class="float__l">Citas en su calendario</div>
   </div>
 
   <div class="wrap hero__in">
     <h1 class="h-xl">
-      <span class="line l1 split" data-split data-anim>nadie</span>
-      <span class="line l2 split dim" data-split data-anim data-delay="260">se queda</span>
-      <span class="line l3 split" data-split data-anim data-delay="520">sin respuesta</span>
+      <span class="line l1 split" data-split data-anim>Una</span>
+      <span class="line l2 split dim" data-split data-anim data-delay="260">secretaria</span>
+      <span class="line l3 split" data-split data-anim data-delay="520">que no duerme</span>
     </h1>
     <p class="hero__sub reveal" style="--i:9" data-anim>
-      Un asistente que atiende el WhatsApp de tu negocio como lo haría
-      alguien de tu equipo: responde precios, agenda en tu calendario real
-      y te pasa la conversación cuando hace falta que entres tú.
+      Un asistente de inteligencia artificial que atiende el WhatsApp de su
+      negocio: informa precios, resuelve dudas, agenda citas en su calendario
+      y le avisa cuando la conversación necesita a una persona.
     </p>
     <div class="hero__cta reveal" style="--i:10" data-anim>
-      <a href="#conversacion" class="btn" data-magnet data-cursor>ver una conversación
+      <a href="#conversacion" class="btn" data-magnet data-cursor>Ver una conversación
         <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
           <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="#planes" class="btn btn--ghost" data-magnet data-cursor>ver planes</a>
+      <a href="#planes" class="btn btn--ghost" data-magnet data-cursor>Ver planes y precios</a>
     </div>
   </div>
 </section>
@@ -486,16 +486,24 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <!-- MARQUESINA -->
 <div class="marq" aria-hidden="true">
   <div class="marq__track" id="marqTrack">
-    <span class="marq__item">veterinarias</span>
-    <span class="marq__item">despachos de abogados</span>
-    <span class="marq__item">peluquerías caninas</span>
-    <span class="marq__item">clínicas dentales</span>
-    <span class="marq__item">talleres</span>
-    <span class="marq__item">spas</span>
-    <span class="marq__item">gimnasios</span>
-    <span class="marq__item">inmobiliarias</span>
-    <span class="marq__item">academias</span>
-    <span class="marq__item">restaurantes</span>
+    <span class="marq__item">Despachos de abogados</span>
+    <span class="marq__item">Consultorios médicos</span>
+    <span class="marq__item">Clínicas odontológicas</span>
+    <span class="marq__item">Veterinarias</span>
+    <span class="marq__item">Peluquerías</span>
+    <span class="marq__item">Peluquerías caninas</span>
+    <span class="marq__item">Centros de estética</span>
+    <span class="marq__item">Spas</span>
+    <span class="marq__item">Talleres y latonerías</span>
+    <span class="marq__item">Inmobiliarias</span>
+    <span class="marq__item">Consultorios psicológicos</span>
+    <span class="marq__item">Gimnasios</span>
+    <span class="marq__item">Academias</span>
+    <span class="marq__item">Contadores</span>
+    <span class="marq__item">Fisioterapeutas</span>
+    <span class="marq__item">Restaurantes</span>
+    <span class="marq__item">Fotógrafos</span>
+    <span class="marq__item">Constructoras</span>
   </div>
 </div>
 
@@ -503,13 +511,13 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec" id="que-hace">
   <div class="wrap sec__head">
     <div>
-      <p class="eyebrow" data-anim>qué hace</p>
-      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>trabaja como alguien de tu equipo</span></h2>
+      <p class="eyebrow" data-anim>Qué hace</p>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>El trabajo de recepción, resuelto</span></h2>
     </div>
     <p class="lede reveal" style="--i:2" data-anim>
-      No es un menú de opciones ni un “marque 1”. Conversa, entiende lo que
-      le piden y hace cosas de verdad: mirar tu agenda, apartar una hora,
-      avisarte a ti.
+      No es un menú de opciones ni un mensaje automático. Sostiene una
+      conversación, entiende lo que le piden y ejecuta: consulta su agenda,
+      aparta una hora y lo notifica a usted cuando corresponde.
     </p>
   </div>
 
@@ -517,31 +525,31 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="pin__sticky">
       <div class="pin__track" id="pinTrack">
         <article class="card iris-border" data-cursor="VER">
-          <span class="card__idx">CONVERSA</span>
-          <h3 class="h-md">escribe como una persona</h3>
-          <p class="card__body">Frases cortas, sin listas ni tecnicismos, con el trato de tu región. Le enseñamos tus precios, tus servicios y tu forma de hablar.</p>
-          <ul class="card__list"><li>tono ajustado a tu negocio</li><li>responde de día y de madrugada</li><li>dice que es un asistente si le preguntan</li></ul>
+          <span class="card__idx">ATIENDE</span>
+          <h3 class="h-md">Responde como su equipo</h3>
+          <p class="card__body">Configuramos el asistente con sus servicios, sus precios y la forma de hablar de su negocio. Responde con frases naturales, sin sonar automático.</p>
+          <ul class="card__list"><li>Tono adaptado a su negocio</li><li>Disponible a cualquier hora</li><li>Aclara que es un asistente virtual</li></ul>
         </article>
         <article class="card iris-border" data-cursor="VER">
           <span class="card__idx">AGENDA</span>
-          <h3 class="h-md">mira tu calendario de verdad</h3>
-          <p class="card__body">Nunca inventa horarios. Consulta tu Google Calendar antes de ofrecer nada y crea la cita con el nombre, el teléfono y el motivo.</p>
-          <ul class="card__list"><li>respeta lo que ya tienes ocupado</li><li>ofrece dos o tres opciones, no toda la agenda</li><li>si el día está lleno, propone otros</li></ul>
+          <h3 class="h-md">Consulta su calendario real</h3>
+          <p class="card__body">Nunca improvisa horarios. Revisa su Google Calendar antes de ofrecer una hora y registra la cita con el nombre, el teléfono y el motivo de la consulta.</p>
+          <ul class="card__list"><li>Respeta sus compromisos ya agendados</li><li>Ofrece dos o tres opciones concretas</li><li>Si el día está lleno, propone alternativas</li></ul>
         </article>
         <article class="card iris-border" data-cursor="VER">
-          <span class="card__idx">TE AVISA</span>
-          <h3 class="h-md">sabe cuándo no debe seguir</h3>
-          <p class="card__body">Cuando algo se sale de lo normal, para y te avisa con el contexto listo. Y si entras tú a contestar, se calla hasta que termines.</p>
-          <ul class="card__list"><li>aviso al instante, con el resumen</li><li>marca lo urgente como urgente</li><li>no te pisa la conversación</li></ul>
+          <span class="card__idx">NOTIFICA</span>
+          <h3 class="h-md">Sabe cuándo debe detenerse</h3>
+          <p class="card__body">Ante un caso delicado o fuera de lo previsto, se detiene y le envía el aviso con el contexto de la conversación. Si usted responde, el asistente se aparta.</p>
+          <ul class="card__list"><li>Notificación inmediata con el resumen</li><li>Diferencia lo urgente de lo que puede esperar</li><li>No interrumpe cuando usted está atendiendo</li></ul>
         </article>
         <article class="card iris-border" data-cursor="VER">
-          <span class="card__idx">TU NÚMERO</span>
-          <h3 class="h-md">sigues usando tu whatsapp</h3>
-          <p class="card__body">Conservas el número que ya está en tus tarjetas y en tu publicidad, con tus chats de siempre. Tu equipo sigue respondiendo desde el celular.</p>
-          <ul class="card__list"><li>sin cambiar de número</li><li>sin perder el historial</li><li>sin instalar nada nuevo</li></ul>
+          <span class="card__idx">SU LÍNEA</span>
+          <h3 class="h-md">Conserva su número actual</h3>
+          <p class="card__body">Mantiene el número que ya está en su publicidad y en sus tarjetas, con todo el historial de conversaciones. Su equipo sigue respondiendo desde el celular de siempre.</p>
+          <ul class="card__list"><li>Sin cambiar de número</li><li>Sin perder los chats anteriores</li><li>Sin instalar aplicaciones nuevas</li></ul>
         </article>
       </div>
-      <span class="pin__hint">sigue bajando →</span>
+      <span class="pin__hint">Siga bajando →</span>
     </div>
   </div>
 </section>
@@ -551,14 +559,15 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   <div class="wrap">
     <div class="audit__grid">
       <div>
-        <p class="eyebrow" data-anim>una conversación real</p>
-        <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>así lo ve tu cliente</span></h2>
+        <p class="eyebrow" data-anim>Una conversación real</p>
+        <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>Así lo atiende a las once de la noche</span></h2>
         <p class="lede reveal" style="--i:2;margin-top:22px" data-anim>
-          Un cliente escribe a las once de la noche preguntando un precio.
-          Termina con la hora apartada y sin haber esperado a que abras.
-          Al día siguiente tú ya sabes quién viene y a qué.
+          La mayoría de las consultas llegan fuera del horario de atención,
+          cuando el cliente por fin tiene tiempo de escribir. Con el asistente,
+          esa consulta termina en una cita agendada en lugar de un mensaje sin
+          responder hasta el día siguiente.
         </p>
-        <a href="#contacto" class="btn reveal" style="--i:3;margin-top:28px" data-anim data-magnet data-cursor>probarlo con mi negocio
+        <a href="#contacto" class="btn reveal" style="--i:3;margin-top:28px" data-anim data-magnet data-cursor>Verlo con los datos de mi negocio
           <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
             <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -567,28 +576,28 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <div class="term chat iris-border reveal" style="--i:2" data-anim data-skew="0.3">
         <div class="term__bar">
           <span class="term__dot"></span><span class="term__dot"></span><span class="term__dot"></span>
-          <span class="term__name">whatsapp — tu negocio</span>
+          <span class="term__name">WhatsApp — Su negocio</span>
         </div>
         <div class="term__body" id="termBody">
-          <div class="term__line msg--sys">hoy, 11:04 p. m.</div>
-          <div class="term__line msg--in">Buenas, ¿cuánto cuesta bañar a mi perro?</div>
-          <div class="term__line msg--out">Con mucho gusto le ayudo. ¿De qué tamaño es su perrito?<span class="msg__t">11:04 p. m.</span></div>
-          <div class="term__line msg--in">Es un labrador, pesa como 30 kilos</div>
-          <div class="term__line msg--out">Ese entra como grande. El baño con secado son 85.000 y se demora unas dos horas.<span class="msg__t">11:05 p. m.</span></div>
-          <div class="term__line msg--in">¿Tienen mañana a las 10?</div>
-          <div class="term__line msg--sys">consultando la agenda</div>
-          <div class="term__line msg--out">Mañana a las 10 ya está tomado, pero tengo a las 2 de la tarde o el jueves a las 9. ¿Cuál le sirve?<span class="msg__t">11:05 p. m.</span></div>
-          <div class="term__line msg--in">El jueves a las 9 está bien</div>
-          <div class="term__line msg--out">Listo, se lo aparté. ¿Me regala su nombre y el de su perrito?<span class="msg__t">11:06 p. m.</span></div>
+          <div class="term__line msg--sys">Hoy, 11:04 p. m.</div>
+          <div class="term__line msg--in">Buenas noches, ¿cuánto cuesta la consulta?</div>
+          <div class="term__line msg--out">Buenas noches. Con mucho gusto le informo. ¿Sobre qué tema necesita la asesoría?<span class="msg__t">11:04 p. m.</span></div>
+          <div class="term__line msg--in">Me despidieron sin justa causa la semana pasada</div>
+          <div class="term__line msg--out">Entiendo, y lamento la situación. La ley laboral contempla una indemnización en esos casos y hay plazos que conviene no dejar correr.<span class="msg__t">11:05 p. m.</span></div>
+          <div class="term__line msg--in">¿Puedo hablar con el abogado esta semana?</div>
+          <div class="term__line msg--sys">Consultando la agenda</div>
+          <div class="term__line msg--out">El miércoles a las 10 de la mañana está disponible, o el jueves a las 3 de la tarde. ¿Cuál le queda mejor?<span class="msg__t">11:05 p. m.</span></div>
+          <div class="term__line msg--in">El miércoles a las 10</div>
+          <div class="term__line msg--out">Perfecto, le aparté ese espacio. ¿Me confirma su nombre completo y un número de contacto?<span class="msg__t">11:06 p. m.</span></div>
           <span class="term__cursor"></span>
         </div>
       </div>
     </div>
 
     <div class="stats">
-      <div class="stat reveal" data-anim><div class="stat__n">11 p. m.</div><p class="stat__l">la hora a la que más se pierden clientes por no contestar</p></div>
-      <div class="stat reveal" style="--i:1" data-anim><div class="stat__n">el mismo día</div><p class="stat__l">tiempo en que dejamos tu número conectado y respondiendo</p></div>
-      <div class="stat reveal" style="--i:2" data-anim><div class="stat__n">cero</div><p class="stat__l">apps nuevas que tú o tu equipo tengan que aprender</p></div>
+      <div class="stat reveal" data-anim><div class="stat__n">Fuera de horario</div><p class="stat__l">Cuando llega buena parte de las consultas y no hay quien las responda</p></div>
+      <div class="stat reveal" style="--i:1" data-anim><div class="stat__n">El mismo día</div><p class="stat__l">Lo que tardamos en dejar su número conectado y atendiendo</p></div>
+      <div class="stat reveal" style="--i:2" data-anim><div class="stat__n">Ninguna</div><p class="stat__l">Aplicación nueva que usted o su equipo tengan que aprender a usar</p></div>
     </div>
   </div>
 </section>
@@ -596,33 +605,33 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <!-- PUESTA EN MARCHA -->
 <section class="sec" id="alta">
   <div class="wrap">
-    <p class="eyebrow" data-anim>puesta en marcha</p>
-    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>de la llamada al bot andando</span></h2>
+    <p class="eyebrow" data-anim>Puesta en marcha</p>
+    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>De la primera llamada al asistente operando</span></h2>
     <div class="proc__list" id="procList">
       <div class="proc__spine" id="procSpine"></div>
       <div class="step reveal" data-anim>
         <span class="step__n">01</span>
-        <div><h3 class="step__t">nos cuentas cómo trabajas</h3>
-        <p class="step__d">Tus servicios, tus precios, tus horarios y qué cosas prefieres atender tú. De ahí sale la forma de hablar del asistente.</p>
-        <p class="step__meta">30 MINUTOS · POR LLAMADA</p></div>
+        <div><h3 class="step__t">Conocemos su operación</h3>
+        <p class="step__d">Sus servicios, sus precios, sus horarios y qué tipo de consultas prefiere atender personalmente. De ahí sale la configuración del asistente.</p>
+        <p class="step__meta">30 MINUTOS · POR VIDEOLLAMADA</p></div>
       </div>
       <div class="step reveal" style="--i:1" data-anim>
         <span class="step__n">02</span>
-        <div><h3 class="step__t">conectamos tu número</h3>
-        <p class="step__d">Lo hacemos contigo en pantalla compartida. Conservas el número, los chats y la app en el celular de tu equipo.</p>
+        <div><h3 class="step__t">Conectamos su número</h3>
+        <p class="step__d">Lo hacemos con usted en pantalla compartida. Conserva el número, el historial de conversaciones y la aplicación en el celular de su equipo.</p>
         <p class="step__meta">EL MISMO DÍA</p></div>
       </div>
       <div class="step reveal" style="--i:2" data-anim>
         <span class="step__n">03</span>
-        <div><h3 class="step__t">lo probamos contigo</h3>
-        <p class="step__d">Le escribes como si fueras un cliente y ajustamos lo que suene raro: un precio, una respuesta, cuándo debe llamarte a ti.</p>
+        <div><h3 class="step__t">Lo ajustamos con usted</h3>
+        <p class="step__d">Usted le escribe como si fuera un cliente y corregimos lo que no se ajuste: un precio, una respuesta, en qué momento debe notificarle a usted.</p>
         <p class="step__meta">2 A 3 DÍAS DE AJUSTES</p></div>
       </div>
       <div class="step reveal" style="--i:3" data-anim>
         <span class="step__n">04</span>
-        <div><h3 class="step__t">queda atendiendo</h3>
-        <p class="step__d">Tú entras cuando quieras y él se aparta. Si cambias precios u horarios, nos escribes y lo actualizamos.</p>
-        <p class="step__meta">SIN PERMANENCIA</p></div>
+        <div><h3 class="step__t">Queda atendiendo</h3>
+        <p class="step__d">Usted interviene cuando quiera y el asistente se aparta. Si cambian sus precios u horarios, nos escribe y lo actualizamos sin costo.</p>
+        <p class="step__meta">SIN CLÁUSULA DE PERMANENCIA</p></div>
       </div>
     </div>
   </div>
@@ -631,54 +640,54 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <!-- PLANES -->
 <section class="sec price" id="planes">
   <div class="wrap">
-    <p class="eyebrow" data-anim>planes</p>
-    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>el precio, dicho de una vez</span></h2>
+    <p class="eyebrow" data-anim>Planes y precios</p>
+    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>Precios claros, sin letra pequeña</span></h2>
     <div class="price__grid">
       <div class="plan iris-border reveal" data-anim data-magnet="0.05">
-        <span class="plan__name">básico</span>
-        <span class="plan__p">350.000<small> AL MES</small></span>
-        <p class="plan__d">Todo lo que hace falta para que nadie se quede sin respuesta.</p>
+        <span class="plan__name">Básico</span>
+        <span class="plan__p">$350.000<small>COP AL MES</small></span>
+        <p class="plan__d">Todo lo necesario para que ninguna consulta se quede sin respuesta.</p>
         <ul>
-          <li>asistente con el tono de tu negocio</li>
-          <li>responde precios, servicios y dudas</li>
-          <li>agenda citas en tu calendario</li>
-          <li>te avisa cuando debe entrar un humano</li>
-          <li>conserva tu número y tus chats</li>
+          <li>Asistente configurado con su información</li>
+          <li>Responde precios, servicios y preguntas frecuentes</li>
+          <li>Agenda citas en su Google Calendar</li>
+          <li>Lo notifica cuando debe intervenir una persona</li>
+          <li>Conserva su número y su historial</li>
         </ul>
-        <a href="#contacto" class="btn btn--ghost" data-cursor>empezar</a>
+        <a href="#contacto" class="btn btn--ghost" data-cursor>Solicitar</a>
       </div>
       <div class="plan plan--hero iris-border reveal" style="--i:1" data-anim data-magnet="0.05">
         <span class="plan__badge">MÁS COMPLETO</span>
-        <span class="plan__name">pro</span>
-        <span class="plan__p">550.000<small> AL MES</small></span>
-        <p class="plan__d">Para negocios donde los clientes mandan audios y fotos, y tú quieres saber qué pasó sin leer nada.</p>
+        <span class="plan__name">Pro</span>
+        <span class="plan__p">$550.000<small>COP AL MES</small></span>
+        <p class="plan__d">Para negocios cuyos clientes envían notas de voz e imágenes, y que quieren un reporte diario sin tener que leer conversaciones.</p>
         <ul>
-          <li>todo lo del plan básico</li>
-          <li>escucha y responde notas de voz</li>
-          <li>resumen del día en un audio</li>
-          <li>asistente personal en tu propio chat</li>
-          <li>lee imágenes: comprobantes de pago, fotos de lo que te piden</li>
+          <li>Todo lo incluido en el plan Básico</li>
+          <li>Escucha y responde notas de voz</li>
+          <li>Resumen diario del día en audio</li>
+          <li>Asistente personal en su chat privado</li>
+          <li>Lectura de imágenes: comprobantes de pago, fotos de referencia</li>
         </ul>
-        <a href="#contacto" class="btn" data-cursor>empezar</a>
+        <a href="#contacto" class="btn" data-cursor>Solicitar</a>
       </div>
       <div class="plan plan--once iris-border reveal" style="--i:2" data-anim data-magnet="0.05">
-        <span class="plan__name">puesta en marcha</span>
-        <span class="plan__p">150.000<small> UNA SOLA VEZ</small></span>
-        <p class="plan__d">Se paga al principio, con el primer mes. Después solo pagas la mensualidad.</p>
+        <span class="plan__name">Puesta en marcha</span>
+        <span class="plan__p">$150.000<small>COP · PAGO ÚNICO</small></span>
+        <p class="plan__d">Se cobra una sola vez, junto con el primer mes. A partir del segundo mes solo paga la mensualidad.</p>
         <ul>
-          <li>conexión de tu número</li>
-          <li>carga de precios y horarios</li>
-          <li>conexión con tu calendario</li>
-          <li>ajustes hasta que suene bien</li>
+          <li>Conexión de su número de WhatsApp</li>
+          <li>Carga de precios, servicios y horarios</li>
+          <li>Integración con su calendario</li>
+          <li>Ajustes hasta dejarlo a su medida</li>
         </ul>
-        <a href="#contacto" class="btn btn--ghost" data-cursor>agendar la llamada</a>
+        <a href="#contacto" class="btn btn--ghost" data-cursor>Agendar llamada</a>
       </div>
     </div>
     <p class="note reveal" data-anim>
-      El primer pago del plan básico es de 500.000 y el del pro de 700.000,
+      El primer pago es de $500.000 COP en el plan Básico y de $700.000 COP en el plan Pro,
       porque incluyen la puesta en marcha.<br>
-      Los meses siguientes son 350.000 y 550.000. Sin permanencia: si te vas,
-      el número sigue siendo tuyo.
+      A partir del segundo mes, $350.000 COP y $550.000 COP respectivamente.
+      Sin cláusula de permanencia: si decide retirarse, el número sigue siendo suyo.
     </p>
   </div>
 </section>
@@ -687,37 +696,37 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec" id="afiliados">
   <div class="wrap sec__head">
     <div>
-      <p class="eyebrow" data-anim>afiliados</p>
-      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>traes un cliente, cobras cada mes</span></h2>
+      <p class="eyebrow" data-anim>Programa de afiliados</p>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>Recomiende un negocio y reciba ingresos cada mes</span></h2>
     </div>
     <p class="lede reveal" style="--i:2" data-anim>
-      Si conoces un negocio al que esto le sirve, preséntanoslo. Cobras
-      cuando se instala y vuelves a cobrar todos los meses mientras
-      siga con nosotros. No tienes que vender ni explicar nada técnico.
+      Si conoce un negocio al que este servicio le puede servir, preséntenoslo.
+      Recibe una comisión cuando queda instalado y una comisión mensual mientras
+      el cliente continúe con nosotros. No necesita vender ni explicar nada técnico.
     </p>
   </div>
 
   <div class="wrap">
     <div class="aff">
       <div class="aff__c iris-border reveal" data-anim>
-        <span class="aff__k">al instalarlo</span>
-        <div class="aff__n"><span data-count="70" data-suffix=" mil">0</span></div>
-        <p class="aff__d">Pago único cuando el cliente queda funcionando, salga el plan que salga.</p>
+        <span class="aff__k">Al quedar instalado</span>
+        <div class="aff__n">$<span data-count="70" data-suffix=".000">0</span></div>
+        <p class="aff__d">Pago único cuando el cliente queda operando, sin importar el plan que contrate.</p>
       </div>
       <div class="aff__c iris-border reveal" style="--i:1" data-anim>
-        <span class="aff__k">cada mes · plan básico</span>
-        <div class="aff__n"><span data-count="50" data-suffix=" mil">0</span></div>
-        <p class="aff__d">Mientras el cliente siga activo, todos los meses, sin tope de tiempo.</p>
+        <span class="aff__k">Cada mes · plan Básico</span>
+        <div class="aff__n">$<span data-count="50" data-suffix=".000">0</span></div>
+        <p class="aff__d">Mientras el cliente siga activo, todos los meses, sin límite de tiempo.</p>
       </div>
       <div class="aff__c iris-border reveal" style="--i:2" data-anim>
-        <span class="aff__k">cada mes · plan pro</span>
-        <div class="aff__n"><span data-count="75" data-suffix=" mil">0</span></div>
-        <p class="aff__d">Si el cliente está en pro, tu pago mensual sube contigo sin hacer nada.</p>
+        <span class="aff__k">Cada mes · plan Pro</span>
+        <div class="aff__n">$<span data-count="75" data-suffix=".000">0</span></div>
+        <p class="aff__d">Si el cliente contrata el plan Pro, su comisión mensual sube automáticamente.</p>
       </div>
     </div>
     <p class="note reveal" data-anim>
-      Tres clientes en plan pro son 225.000 al mes que entran solos.<br>
-      Nosotros hacemos la llamada, la instalación y el soporte.
+      Tres clientes en plan Pro equivalen a $225.000 COP mensuales de ingreso recurrente.<br>
+      Nosotros nos encargamos de la llamada, la instalación y el soporte.
     </p>
   </div>
 </section>
@@ -726,23 +735,23 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec" id="contacto">
   <div class="wrap cta__grid">
     <div>
-      <p class="eyebrow" data-anim>hablemos</p>
-      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>cuéntanos de tu negocio y te lo mostramos</span></h2>
+      <p class="eyebrow" data-anim>Contacto</p>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>Cuéntenos de su negocio y se lo mostramos funcionando</span></h2>
       <p class="lede reveal" style="--i:2;margin-top:22px" data-anim>
-        Te enseñamos el asistente funcionando con los precios de tu negocio,
-        no con un ejemplo genérico. Si te convence, lo dejamos conectado
-        ese mismo día.
+        Preparamos una demostración con los precios y servicios reales de su
+        negocio, no con un ejemplo genérico. Si le convence, lo dejamos
+        conectado ese mismo día.
       </p>
       <p class="reveal" style="--i:3;margin-top:20px;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--fg-muted)" data-anim>
         hola@nulltrace.com
       </p>
     </div>
     <form class="form reveal" style="--i:2" id="form" data-anim novalidate>
-      <div class="field"><label for="nombre">nombre</label><input id="nombre" name="nombre" type="text" required autocomplete="name"></div>
-      <div class="field"><label for="negocio">tu negocio</label><input id="negocio" name="negocio" type="text" placeholder="peluquería canina, despacho, taller…"></div>
-      <div class="field"><label for="email">whatsapp o correo</label><input id="email" name="email" type="text" required autocomplete="email"></div>
-      <div class="field"><label for="msg">qué te gustaría que atendiera</label><textarea id="msg" name="mensaje"></textarea></div>
-      <button type="submit" class="btn" data-magnet data-cursor>pedir la demostración</button>
+      <div class="field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" required autocomplete="name"></div>
+      <div class="field"><label for="negocio">Su negocio</label><input id="negocio" name="negocio" type="text" placeholder="Despacho, consultorio, veterinaria…"></div>
+      <div class="field"><label for="email">WhatsApp o correo</label><input id="email" name="email" type="text" required autocomplete="email"></div>
+      <div class="field"><label for="msg">Qué le gustaría que atendiera</label><textarea id="msg" name="mensaje"></textarea></div>
+      <button type="submit" class="btn" data-magnet data-cursor>Solicitar demostración</button>
       <p class="form__note" id="formNote">Respondemos el mismo día.</p>
     </form>
   </div>
@@ -756,7 +765,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="foot__bottom">
       <span>© 2026 NULLTRACE · nulltrace.com</span>
       <nav class="foot__links">
-        <a href="#planes">planes</a><a href="#afiliados">afiliados</a><a href="#">privacidad</a><a href="#contacto">contacto</a>
+        <a href="#planes">Planes</a><a href="#afiliados">Afiliados</a><a href="#">Privacidad</a><a href="#contacto">Contacto</a>
       </nav>
     </div>
   </div>
