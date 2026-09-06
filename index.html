@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>NullTrace — El WhatsApp de tu negocio, atendido siempre</title>
-<meta name="description" content="Un asistente de IA que atiende el WhatsApp de tu negocio: responde precios, agenda citas en tu calendario real y te avisa cuando hace falta un humano. Desde 350.000 COP al mes.">
+<title>KlarTrace — Su negocio activo en WhatsApp 24/7</title>
+<meta name="description" content="Un asistente de inteligencia artificial que atiende el WhatsApp de su negocio: informa precios, agenda citas en su calendario y le avisa cuando debe intervenir. Desde $350.000 COP al mes.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -240,7 +240,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .sec__head{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,70px);align-items:end}
 
 /* Escena horizontal fijada */
-.pin{height:360vh;position:relative}
+.pin{height:430vh;position:relative}
 .pin__sticky{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden}
 .pin__track{display:flex;gap:22px;padding-inline:var(--gut);will-change:transform}
 .card{flex:none;width:min(400px,80vw);background:var(--surface);border-radius:24px;padding:30px;
@@ -423,14 +423,16 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   background:var(--surface-2);border:1px solid var(--line);border-radius:9px;
   width:30px;height:30px;display:grid;place-items:center;flex:none}
 .aff__t{font-weight:500;font-size:1.05rem;letter-spacing:-.02em;line-height:1.3}
-.rules{margin-top:42px;display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;
-  padding-top:26px;border-top:1px solid var(--line)}
-.rules h3{grid-column:1/-1;font-family:var(--mono);font-size:.63rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--fg-dim);font-weight:400;margin-bottom:2px}
-.rules p{color:var(--fg-muted);font-size:.88rem;line-height:1.6;display:flex;gap:11px}
-.rules p::before{content:'';width:5px;height:5px;border-radius:50%;flex:none;margin-top:.6em;
+.rules{margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:26px 48px;
+  padding-top:40px;border-top:1px solid var(--line)}
+.rules h3{grid-column:1/-1;font-family:var(--display);font-weight:500;
+  font-size:clamp(1.5rem,2.6vw,2.1rem);letter-spacing:-.03em;line-height:1.1;
+  color:var(--fg);margin-bottom:14px}
+.rules p{color:var(--fg-muted);font-size:clamp(1rem,1.35vw,1.12rem);line-height:1.65;
+  display:flex;gap:16px}
+.rules p::before{content:'';width:7px;height:7px;border-radius:50%;flex:none;margin-top:.62em;
   background:linear-gradient(120deg,var(--iris-1),var(--iris-4))}
-@media (max-width:1000px){.rules{grid-template-columns:1fr}}
+@media (max-width:1000px){.rules{grid-template-columns:1fr;gap:20px}}
 
 </style>
 </head>
@@ -438,7 +440,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 <div class="pre" id="pre">
   <span class="pre__n" id="preN">0</span>
-  <span class="pre__l">NullTrace · cargando</span>
+  <span class="pre__l">KlarTrace · cargando</span>
   <span class="pre__bar" id="preBar"></span>
 </div>
 
@@ -448,7 +450,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 <header class="nav" id="nav">
   <div class="wrap nav__in">
-    <a href="#" class="logo pill" data-cursor><span class="logo__mark"></span>nulltrace</a>
+    <a href="#" class="logo pill" data-cursor><span class="logo__mark"></span>klartrace</a>
     <nav class="nav__links pill" id="navLinks">
       <a href="#que-hace">Qué hace</a>
       <a href="#conversacion">Conversación</a>
@@ -559,6 +561,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
           <h3 class="h-md">Sabe cuándo debe detenerse</h3>
           <p class="card__body">Ante un caso delicado o fuera de lo previsto, se detiene y le envía el aviso con el contexto de la conversación. Si usted responde, el asistente se aparta.</p>
           <ul class="card__list"><li>Notificación inmediata con el resumen</li><li>Diferencia lo urgente de lo que puede esperar</li><li>No interrumpe cuando usted está atendiendo</li></ul>
+        </article>
+        <article class="card iris-border" data-cursor="VER">
+          <span class="card__idx">RECUPERA · PRO</span>
+          <h3 class="h-md">Vuelve por la venta que no se cerró</h3>
+          <p class="card__body">Cuando una conversación queda a medias y el cliente no vuelve, el asistente lo retoma al día siguiente y le pregunta si sigue interesado. Muchas ventas no se pierden por precio, sino porque nadie volvió a escribir.</p>
+          <ul class="card__list"><li>Detecta las consultas sin cerrar</li><li>Retoma con el contexto de lo que ya hablaron</li><li>Si no hay interés, no vuelve a insistir</li></ul>
         </article>
         <article class="card iris-border" data-cursor="VER">
           <span class="card__idx">SU LÍNEA</span>
@@ -685,6 +693,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
           <li>Resumen diario del día en audio</li>
           <li>Asistente personal en su chat privado</li>
           <li>Lectura de imágenes: comprobantes de pago, fotos de referencia</li>
+          <li>Genera documentos por usted y le ahorra el trabajo repetitivo</li>
+          <li>Recuperación de clientes: retoma al día siguiente las conversaciones que quedaron sin cerrar</li>
         </ul>
         <a href="#contacto" class="btn" data-cursor>Solicitar</a>
       </div>
@@ -747,17 +757,17 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <div class="aff__c iris-border reveal" data-anim>
         <span class="aff__k">Al primer pago del cliente</span>
         <div class="aff__n">$<span data-count="70" data-suffix=".000">0</span></div>
-        <p class="aff__d">Su comisión por haber traído al cliente. Se paga una sola vez, con cualquiera de los dos planes.</p>
+        <p class="aff__d">Se paga su comisión siempre y cuando el cliente contrate el servicio.</p>
       </div>
       <div class="aff__c iris-border reveal" style="--i:1" data-anim>
         <span class="aff__k">Cada mes · plan Básico</span>
         <div class="aff__n">$<span data-count="50" data-suffix=".000">0</span></div>
-        <p class="aff__d">Mientras ese cliente siga pagando, sin límite de tiempo. No tiene que volver a hacer nada.</p>
+        <p class="aff__d">Mientras el cliente que refirió siga utilizando nuestro servicio, usted seguirá recibiendo este monto mensualmente.</p>
       </div>
       <div class="aff__c iris-border reveal" style="--i:2" data-anim>
         <span class="aff__k">Cada mes · plan Pro</span>
         <div class="aff__n">$<span data-count="75" data-suffix=".000">0</span></div>
-        <p class="aff__d">Si el cliente contrata el plan Pro, su comisión mensual sube automáticamente.</p>
+        <p class="aff__d">Mientras el cliente que refirió siga utilizando nuestro servicio, usted seguirá recibiendo este monto mensualmente.</p>
       </div>
     </div>
 
@@ -795,7 +805,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         conectado ese mismo día.
       </p>
       <p class="reveal" style="--i:3;margin-top:20px;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--fg-muted)" data-anim>
-        hola@nulltrace.com
+        hola@klartrace.com
       </p>
     </div>
     <form class="form reveal" style="--i:2" id="form" data-anim novalidate>
@@ -813,9 +823,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 <footer class="foot">
   <div class="wrap">
-    <div class="foot__word" data-parallax="-0.08">nulltrace</div>
+    <div class="foot__word" data-parallax="-0.08">klartrace</div>
     <div class="foot__bottom">
-      <span>© 2026 NULLTRACE · nulltrace.com</span>
+      <span>© 2026 KLARTRACE · klartrace.com</span>
       <nav class="foot__links">
         <a href="#planes">Planes</a><a href="#afiliados">Afiliados</a><a href="#">Privacidad</a><a href="#contacto">Contacto</a>
       </nav>
