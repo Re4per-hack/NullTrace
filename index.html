@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Bastión — Protege lo que construiste</title>
-<meta name="description" content="Diseñamos la web de tu empresa y la mantenemos a salvo. Auditoría de seguridad gratuita para pymes.">
+<title>NullTrace — El WhatsApp de tu negocio, atendido siempre</title>
+<meta name="description" content="Un asistente de IA que atiende el WhatsApp de tu negocio: responde precios, agenda citas en tu calendario real y te avisa cuando hace falta un humano. Desde 350.000 COP al mes.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -380,13 +380,47 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   .card{width:auto;min-height:0;transform:none!important;opacity:1!important}
   .hero__gl,.pre,.cur,.cur-ring{display:none}
 }
+
+/* ============================================================
+   CHAT DEMO — reutiliza .term__line para la animacion escalonada
+   ============================================================ */
+.chat .term__body{gap:12px;padding:22px 18px;min-height:420px;font-family:var(--display)}
+.chat .term__line{display:block;max-width:78%;padding:11px 14px;border-radius:16px;
+  font-size:.88rem;line-height:1.5;position:relative}
+.chat .msg--in{background:var(--surface-2);border:1px solid var(--line);
+  border-bottom-left-radius:5px;color:var(--fg-muted)}
+.chat .msg--out{background:linear-gradient(120deg,rgba(177,75,255,.18),rgba(53,232,224,.14));
+  border:1px solid rgba(177,75,255,.32);border-bottom-right-radius:5px;
+  margin-left:auto;color:var(--fg)}
+.chat .msg--sys{max-width:100%;background:none;border:none;padding:4px 0;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-dim);text-align:center}
+.chat .msg__t{display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;
+  color:var(--fg-dim);margin-top:6px}
+.chat .term__cursor{align-self:flex-start}
+
+/* ============================================================
+   INSTALACION Y AFILIADOS
+   ============================================================ */
+.plan--once .plan__p{font-size:1.9rem}
+.note{margin-top:26px;font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;
+  color:var(--fg-dim);line-height:1.9}
+.aff{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
+.aff__c{background:var(--surface);border-radius:20px;padding:28px 26px;
+  display:flex;flex-direction:column;gap:10px}
+.aff__n{font-weight:600;font-size:clamp(1.9rem,3.6vw,2.8rem);letter-spacing:-.05em;line-height:1}
+.aff__k{font-family:var(--mono);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-dim)}
+.aff__d{color:var(--fg-muted);font-size:.88rem;line-height:1.6}
+@media (max-width:1000px){.aff{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 
 <div class="pre" id="pre">
   <span class="pre__n" id="preN">0</span>
-  <span class="pre__l">Bastión · cargando</span>
+  <span class="pre__l">NullTrace · cargando</span>
   <span class="pre__bar" id="preBar"></span>
 </div>
 
@@ -396,14 +430,15 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 <header class="nav" id="nav">
   <div class="wrap nav__in">
-    <a href="#" class="logo pill" data-cursor><span class="logo__mark"></span>bastión</a>
+    <a href="#" class="logo pill" data-cursor><span class="logo__mark"></span>nulltrace</a>
     <nav class="nav__links pill" id="navLinks">
-      <a href="#servicios">servicios</a>
-      <a href="#seguridad">seguridad</a>
-      <a href="#proceso">proceso</a>
-      <a href="#precios">precios</a>
+      <a href="#que-hace">qué hace</a>
+      <a href="#conversacion">conversación</a>
+      <a href="#alta">puesta en marcha</a>
+      <a href="#planes">planes</a>
+      <a href="#afiliados">afiliados</a>
     </nav>
-    <a href="#contacto" class="btn nav__cta" data-magnet data-cursor>empezar</a>
+    <a href="#contacto" class="btn nav__cta" data-magnet data-cursor>quiero uno</a>
     <button class="nav__toggle pill" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
   </div>
 </header>
@@ -415,35 +450,35 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   <canvas class="hero__gl" id="gl" aria-hidden="true"></canvas>
 
   <div class="float f1" data-parallax="0.12">
-    <div class="float__n"><span data-count="180" data-prefix="+">0</span></div>
-    <div class="float__l">webs protegidas</div>
+    <div class="float__n">24/7</div>
+    <div class="float__l">sin turnos ni festivos</div>
   </div>
   <div class="float f2" data-parallax="0.2">
-    <div class="float__n"><span data-count="99.9" data-dec="1" data-suffix="%">0%</span></div>
-    <div class="float__l">uptime medio</div>
+    <div class="float__n">tu número</div>
+    <div class="float__l">el mismo de siempre</div>
   </div>
   <div class="float f3" data-parallax="0.08">
-    <div class="float__n">24/7</div>
-    <div class="float__l">vigilancia activa</div>
+    <div class="float__n">tu agenda</div>
+    <div class="float__l">citas en tu calendario</div>
   </div>
 
   <div class="wrap hero__in">
     <h1 class="h-xl">
-      <span class="line l1 split" data-split data-anim>protege</span>
-      <span class="line l2 split dim" data-split data-anim data-delay="260">lo que</span>
-      <span class="line l3 split" data-split data-anim data-delay="520">construiste</span>
+      <span class="line l1 split" data-split data-anim>nadie</span>
+      <span class="line l2 split dim" data-split data-anim data-delay="260">se queda</span>
+      <span class="line l3 split" data-split data-anim data-delay="520">sin respuesta</span>
     </h1>
     <p class="hero__sub reveal" style="--i:9" data-anim>
-      Diseñamos la web de tu empresa y la mantenemos a salvo.
-      Precio cerrado, código propio y la parte de seguridad
-      que las agencias baratas se saltan.
+      Un asistente que atiende el WhatsApp de tu negocio como lo haría
+      alguien de tu equipo: responde precios, agenda en tu calendario real
+      y te pasa la conversación cuando hace falta que entres tú.
     </p>
     <div class="hero__cta reveal" style="--i:10" data-anim>
-      <a href="#contacto" class="btn" data-magnet data-cursor>auditoría gratis
+      <a href="#conversacion" class="btn" data-magnet data-cursor>ver una conversación
         <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
           <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="#servicios" class="btn btn--ghost" data-magnet data-cursor>ver servicios</a>
+      <a href="#planes" class="btn btn--ghost" data-magnet data-cursor>ver planes</a>
     </div>
   </div>
 </section>
@@ -451,28 +486,30 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <!-- MARQUESINA -->
 <div class="marq" aria-hidden="true">
   <div class="marq__track" id="marqTrack">
-    <span class="marq__item">clínicas</span>
+    <span class="marq__item">veterinarias</span>
     <span class="marq__item">despachos de abogados</span>
-    <span class="marq__item">asesorías</span>
-    <span class="marq__item">automoción</span>
-    <span class="marq__item">tiendas online</span>
-    <span class="marq__item">restauración</span>
+    <span class="marq__item">peluquerías caninas</span>
+    <span class="marq__item">clínicas dentales</span>
+    <span class="marq__item">talleres</span>
+    <span class="marq__item">spas</span>
+    <span class="marq__item">gimnasios</span>
     <span class="marq__item">inmobiliarias</span>
-    <span class="marq__item">constructoras</span>
     <span class="marq__item">academias</span>
+    <span class="marq__item">restaurantes</span>
   </div>
 </div>
 
-<!-- SERVICIOS -->
-<section class="sec" id="servicios">
+<!-- QUÉ HACE -->
+<section class="sec" id="que-hace">
   <div class="wrap sec__head">
     <div>
-      <p class="eyebrow" data-anim>01 — lo visible</p>
-      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>la web que ven tus clientes</span></h2>
+      <p class="eyebrow" data-anim>qué hace</p>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>trabaja como alguien de tu equipo</span></h2>
     </div>
     <p class="lede reveal" style="--i:2" data-anim>
-      Nada de plantillas recicladas. Diseñamos cada página alrededor de lo que
-      vende tu negocio y la construimos para que cargue rápido con mala cobertura.
+      No es un menú de opciones ni un “marque 1”. Conversa, entiende lo que
+      le piden y hace cosas de verdad: mirar tu agenda, apartar una hora,
+      avisarte a ti.
     </p>
   </div>
 
@@ -480,28 +517,28 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="pin__sticky">
       <div class="pin__track" id="pinTrack">
         <article class="card iris-border" data-cursor="VER">
-          <span class="card__idx">DISEÑO</span>
-          <h3 class="h-md">identidad a medida</h3>
-          <p class="card__body">Partimos de tu sector, tus clientes y lo que hace la competencia. Ves maquetas reales antes de que escribamos una línea de código.</p>
-          <ul class="card__list"><li>maquetas en 72 horas</li><li>dos rondas de cambios</li><li>diseño móvil primero</li></ul>
+          <span class="card__idx">CONVERSA</span>
+          <h3 class="h-md">escribe como una persona</h3>
+          <p class="card__body">Frases cortas, sin listas ni tecnicismos, con el trato de tu región. Le enseñamos tus precios, tus servicios y tu forma de hablar.</p>
+          <ul class="card__list"><li>tono ajustado a tu negocio</li><li>responde de día y de madrugada</li><li>dice que es un asistente si le preguntan</li></ul>
         </article>
         <article class="card iris-border" data-cursor="VER">
-          <span class="card__idx">DESARROLLO</span>
-          <h3 class="h-md">código propio, sin lastre</h3>
-          <p class="card__body">Sin veinte plugins peleándose entre sí. Menos código son menos cosas que se rompen y menos puertas abiertas.</p>
-          <ul class="card__list"><li>carga bajo 1,5 s</li><li>panel para editar todo</li><li>accesible y bien estructurada</li></ul>
+          <span class="card__idx">AGENDA</span>
+          <h3 class="h-md">mira tu calendario de verdad</h3>
+          <p class="card__body">Nunca inventa horarios. Consulta tu Google Calendar antes de ofrecer nada y crea la cita con el nombre, el teléfono y el motivo.</p>
+          <ul class="card__list"><li>respeta lo que ya tienes ocupado</li><li>ofrece dos o tres opciones, no toda la agenda</li><li>si el día está lleno, propone otros</li></ul>
         </article>
         <article class="card iris-border" data-cursor="VER">
-          <span class="card__idx">VISIBILIDAD</span>
-          <h3 class="h-md">que te encuentren</h3>
-          <p class="card__body">SEO técnico de base, ficha de Google en condiciones y analítica que puedes leer sin ser analista de datos.</p>
-          <ul class="card__list"><li>SEO técnico y contenidos</li><li>Google Business configurado</li><li>informe mensual de una página</li></ul>
+          <span class="card__idx">TE AVISA</span>
+          <h3 class="h-md">sabe cuándo no debe seguir</h3>
+          <p class="card__body">Cuando algo se sale de lo normal, para y te avisa con el contexto listo. Y si entras tú a contestar, se calla hasta que termines.</p>
+          <ul class="card__list"><li>aviso al instante, con el resumen</li><li>marca lo urgente como urgente</li><li>no te pisa la conversación</li></ul>
         </article>
         <article class="card iris-border" data-cursor="VER">
-          <span class="card__idx">ENTREGA</span>
-          <h3 class="h-md">tuya de verdad</h3>
-          <p class="card__body">Dominio, hosting y código a tu nombre. Si algún día te vas, te llevas todo. No secuestramos proyectos.</p>
-          <ul class="card__list"><li>accesos a tu nombre desde el día uno</li><li>formación al entregar</li><li>sin permanencia</li></ul>
+          <span class="card__idx">TU NÚMERO</span>
+          <h3 class="h-md">sigues usando tu whatsapp</h3>
+          <p class="card__body">Conservas el número que ya está en tus tarjetas y en tu publicidad, con tus chats de siempre. Tu equipo sigue respondiendo desde el celular.</p>
+          <ul class="card__list"><li>sin cambiar de número</li><li>sin perder el historial</li><li>sin instalar nada nuevo</li></ul>
         </article>
       </div>
       <span class="pin__hint">sigue bajando →</span>
@@ -509,116 +546,179 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   </div>
 </section>
 
-<!-- SEGURIDAD -->
-<section class="sec" id="seguridad">
+<!-- CONVERSACIÓN -->
+<section class="sec" id="conversacion">
   <div class="wrap">
     <div class="audit__grid">
       <div>
-        <p class="eyebrow" data-anim>02 — lo invisible</p>
-        <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>lo que revisamos antes que otro</span></h2>
+        <p class="eyebrow" data-anim>una conversación real</p>
+        <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>así lo ve tu cliente</span></h2>
         <p class="lede reveal" style="--i:2;margin-top:22px" data-anim>
-          Casi todas las webs de pyme que auditamos llevan meses con algo abierto:
-          un plugin sin actualizar, un panel expuesto, copias que nadie ha probado
-          a restaurar. Lo miramos gratis y te decimos qué hay.
+          Un cliente escribe a las once de la noche preguntando un precio.
+          Termina con la hora apartada y sin haber esperado a que abras.
+          Al día siguiente tú ya sabes quién viene y a qué.
         </p>
-        <a href="#contacto" class="btn reveal" style="--i:3;margin-top:28px" data-anim data-magnet data-cursor>auditar mi web
+        <a href="#contacto" class="btn reveal" style="--i:3;margin-top:28px" data-anim data-magnet data-cursor>probarlo con mi negocio
           <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
             <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
 
-      <div class="term iris-border reveal" style="--i:2" data-anim data-skew="0.3">
+      <div class="term chat iris-border reveal" style="--i:2" data-anim data-skew="0.3">
         <div class="term__bar">
           <span class="term__dot"></span><span class="term__dot"></span><span class="term__dot"></span>
-          <span class="term__name">auditoria — tu-empresa.com</span>
+          <span class="term__name">whatsapp — tu negocio</span>
         </div>
         <div class="term__body" id="termBody">
-          <div class="term__line"><span class="term__tag t-scan">SCAN</span><span class="term__txt">revisando cabeceras de seguridad…</span></div>
-          <div class="term__line"><span class="term__tag t-risk">RIESGO</span><span class="term__txt">panel de administración accesible desde internet</span></div>
-          <div class="term__line"><span class="term__tag t-risk">RIESGO</span><span class="term__txt">gestor de contenidos 3 versiones por detrás</span></div>
-          <div class="term__line"><span class="term__tag t-risk">RIESGO</span><span class="term__txt">copias sin verificar desde hace 214 días</span></div>
-          <div class="term__line"><span class="term__tag t-scan">SCAN</span><span class="term__txt">comprobando certificado y redirecciones…</span></div>
-          <div class="term__line"><span class="term__tag t-ok">OK</span><span class="term__txt">acceso restringido y doble factor activado</span></div>
-          <div class="term__line"><span class="term__tag t-ok">OK</span><span class="term__txt">copias diarias, restauración probada</span></div>
-          <div class="term__line"><span class="term__tag t-ok">OK</span><span class="term__txt">vigilancia activa 24/7</span></div>
-          <div class="term__line"><span class="term__tag t-ok">OK</span><span class="term__txt">informe enviado — 3 riesgos corregidos</span></div>
+          <div class="term__line msg--sys">hoy, 11:04 p. m.</div>
+          <div class="term__line msg--in">Buenas, ¿cuánto cuesta bañar a mi perro?</div>
+          <div class="term__line msg--out">Con mucho gusto le ayudo. ¿De qué tamaño es su perrito?<span class="msg__t">11:04 p. m.</span></div>
+          <div class="term__line msg--in">Es un labrador, pesa como 30 kilos</div>
+          <div class="term__line msg--out">Ese entra como grande. El baño con secado son 85.000 y se demora unas dos horas.<span class="msg__t">11:05 p. m.</span></div>
+          <div class="term__line msg--in">¿Tienen mañana a las 10?</div>
+          <div class="term__line msg--sys">consultando la agenda</div>
+          <div class="term__line msg--out">Mañana a las 10 ya está tomado, pero tengo a las 2 de la tarde o el jueves a las 9. ¿Cuál le sirve?<span class="msg__t">11:05 p. m.</span></div>
+          <div class="term__line msg--in">El jueves a las 9 está bien</div>
+          <div class="term__line msg--out">Listo, se lo aparté. ¿Me regala su nombre y el de su perrito?<span class="msg__t">11:06 p. m.</span></div>
           <span class="term__cursor"></span>
         </div>
       </div>
     </div>
 
     <div class="stats">
-      <div class="stat reveal" data-anim><div class="stat__n"><span data-count="63" data-suffix="%">0%</span></div><p class="stat__l">de las webs que auditamos tenían un riesgo alto sin resolver</p></div>
-      <div class="stat reveal" style="--i:1" data-anim><div class="stat__n"><span data-count="15" data-suffix=" min">0</span></div><p class="stat__l">desde que detectamos un incidente hasta que te avisamos</p></div>
-      <div class="stat reveal" style="--i:2" data-anim><div class="stat__n"><span data-count="0">0</span></div><p class="stat__l">webs con mantenimiento nuestro comprometidas hasta hoy</p></div>
+      <div class="stat reveal" data-anim><div class="stat__n">11 p. m.</div><p class="stat__l">la hora a la que más se pierden clientes por no contestar</p></div>
+      <div class="stat reveal" style="--i:1" data-anim><div class="stat__n">el mismo día</div><p class="stat__l">tiempo en que dejamos tu número conectado y respondiendo</p></div>
+      <div class="stat reveal" style="--i:2" data-anim><div class="stat__n">cero</div><p class="stat__l">apps nuevas que tú o tu equipo tengan que aprender</p></div>
     </div>
   </div>
 </section>
 
-<!-- PROCESO -->
-<section class="sec" id="proceso">
+<!-- PUESTA EN MARCHA -->
+<section class="sec" id="alta">
   <div class="wrap">
-    <p class="eyebrow" data-anim>cómo trabajamos</p>
-    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>cuatro pasos, sin sorpresas</span></h2>
+    <p class="eyebrow" data-anim>puesta en marcha</p>
+    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>de la llamada al bot andando</span></h2>
     <div class="proc__list" id="procList">
       <div class="proc__spine" id="procSpine"></div>
       <div class="step reveal" data-anim>
         <span class="step__n">01</span>
-        <div><h3 class="step__t">auditamos lo que ya tienes</h3>
-        <p class="step__d">Miramos tu web actual, tu posicionamiento y tus riesgos abiertos. Informe en lenguaje normal, sin coste y sin compromiso.</p>
-        <p class="step__meta">2 DÍAS · GRATIS</p></div>
+        <div><h3 class="step__t">nos cuentas cómo trabajas</h3>
+        <p class="step__d">Tus servicios, tus precios, tus horarios y qué cosas prefieres atender tú. De ahí sale la forma de hablar del asistente.</p>
+        <p class="step__meta">30 MINUTOS · POR LLAMADA</p></div>
       </div>
       <div class="step reveal" style="--i:1" data-anim>
         <span class="step__n">02</span>
-        <div><h3 class="step__t">diseñamos y te lo enseñamos</h3>
-        <p class="step__d">Recibes maquetas reales de tu web, no bocetos genéricos. Cambiamos lo que haga falta antes de construir nada.</p>
-        <p class="step__meta">72 HORAS PARA LA PRIMERA VERSIÓN</p></div>
+        <div><h3 class="step__t">conectamos tu número</h3>
+        <p class="step__d">Lo hacemos contigo en pantalla compartida. Conservas el número, los chats y la app en el celular de tu equipo.</p>
+        <p class="step__meta">EL MISMO DÍA</p></div>
       </div>
       <div class="step reveal" style="--i:2" data-anim>
         <span class="step__n">03</span>
-        <div><h3 class="step__t">construimos y blindamos</h3>
-        <p class="step__d">Desarrollo, contenidos, velocidad y configuración de seguridad en el mismo paquete. Sale a producción ya protegida.</p>
-        <p class="step__meta">2 A 4 SEMANAS SEGÚN TAMAÑO</p></div>
+        <div><h3 class="step__t">lo probamos contigo</h3>
+        <p class="step__d">Le escribes como si fueras un cliente y ajustamos lo que suene raro: un precio, una respuesta, cuándo debe llamarte a ti.</p>
+        <p class="step__meta">2 A 3 DÍAS DE AJUSTES</p></div>
       </div>
       <div class="step reveal" style="--i:3" data-anim>
         <span class="step__n">04</span>
-        <div><h3 class="step__t">vigilamos cada día</h3>
-        <p class="step__d">Actualizaciones, copias verificadas y monitorización. Si algo falla lo sabemos antes que tú, y lo arreglamos.</p>
-        <p class="step__meta">CONTINUO · SIN PERMANENCIA</p></div>
+        <div><h3 class="step__t">queda atendiendo</h3>
+        <p class="step__d">Tú entras cuando quieras y él se aparta. Si cambias precios u horarios, nos escribes y lo actualizamos.</p>
+        <p class="step__meta">SIN PERMANENCIA</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRECIOS -->
-<section class="sec price" id="precios">
+<!-- PLANES -->
+<section class="sec price" id="planes">
   <div class="wrap">
-    <p class="eyebrow" data-anim>precios</p>
-    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>lo que cuesta, dicho antes</span></h2>
+    <p class="eyebrow" data-anim>planes</p>
+    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>el precio, dicho de una vez</span></h2>
     <div class="price__grid">
       <div class="plan iris-border reveal" data-anim data-magnet="0.05">
-        <span class="plan__name">esencial</span>
-        <span class="plan__p">890 €<small> PAGO ÚNICO</small></span>
-        <p class="plan__d">Para negocios que solo necesitan estar bien presentados y que les llamen.</p>
-        <ul><li>hasta 5 secciones</li><li>diseño a medida y textos</li><li>formulario y Google Business</li><li>certificado y copias configuradas</li></ul>
+        <span class="plan__name">básico</span>
+        <span class="plan__p">350.000<small> AL MES</small></span>
+        <p class="plan__d">Todo lo que hace falta para que nadie se quede sin respuesta.</p>
+        <ul>
+          <li>asistente con el tono de tu negocio</li>
+          <li>responde precios, servicios y dudas</li>
+          <li>agenda citas en tu calendario</li>
+          <li>te avisa cuando debe entrar un humano</li>
+          <li>conserva tu número y tus chats</li>
+        </ul>
         <a href="#contacto" class="btn btn--ghost" data-cursor>empezar</a>
       </div>
       <div class="plan plan--hero iris-border reveal" style="--i:1" data-anim data-magnet="0.05">
-        <span class="plan__badge">MÁS ELEGIDO</span>
-        <span class="plan__name">profesional</span>
-        <span class="plan__p">1.900 €<small> PAGO ÚNICO</small></span>
-        <p class="plan__d">Para empresas que usan la web como canal de venta y quieren poder editarla.</p>
-        <ul><li>páginas ilimitadas y blog</li><li>panel para editarlo todo</li><li>SEO técnico y analítica</li><li>auditoría de seguridad completa</li><li>3 meses de vigilancia incluidos</li></ul>
+        <span class="plan__badge">MÁS COMPLETO</span>
+        <span class="plan__name">pro</span>
+        <span class="plan__p">550.000<small> AL MES</small></span>
+        <p class="plan__d">Para negocios donde los clientes mandan audios y fotos, y tú quieres saber qué pasó sin leer nada.</p>
+        <ul>
+          <li>todo lo del plan básico</li>
+          <li>escucha y responde notas de voz</li>
+          <li>resumen del día en un audio</li>
+          <li>asistente personal en tu propio chat</li>
+          <li>lee imágenes: comprobantes de pago, fotos de lo que te piden</li>
+        </ul>
         <a href="#contacto" class="btn" data-cursor>empezar</a>
       </div>
-      <div class="plan iris-border reveal" style="--i:2" data-anim data-magnet="0.05">
-        <span class="plan__name">escudo</span>
-        <span class="plan__p">79 €<small> AL MES</small></span>
-        <p class="plan__d">Mantenimiento y seguridad continuos. También si tu web la hizo otro.</p>
-        <ul><li>actualizaciones y parches</li><li>copias diarias verificadas</li><li>monitorización 24/7</li><li>cambios pequeños incluidos</li></ul>
-        <a href="#contacto" class="btn btn--ghost" data-cursor>contratar</a>
+      <div class="plan plan--once iris-border reveal" style="--i:2" data-anim data-magnet="0.05">
+        <span class="plan__name">puesta en marcha</span>
+        <span class="plan__p">150.000<small> UNA SOLA VEZ</small></span>
+        <p class="plan__d">Se paga al principio, con el primer mes. Después solo pagas la mensualidad.</p>
+        <ul>
+          <li>conexión de tu número</li>
+          <li>carga de precios y horarios</li>
+          <li>conexión con tu calendario</li>
+          <li>ajustes hasta que suene bien</li>
+        </ul>
+        <a href="#contacto" class="btn btn--ghost" data-cursor>agendar la llamada</a>
       </div>
     </div>
+    <p class="note reveal" data-anim>
+      El primer pago del plan básico es de 500.000 y el del pro de 700.000,
+      porque incluyen la puesta en marcha.<br>
+      Los meses siguientes son 350.000 y 550.000. Sin permanencia: si te vas,
+      el número sigue siendo tuyo.
+    </p>
+  </div>
+</section>
+
+<!-- AFILIADOS -->
+<section class="sec" id="afiliados">
+  <div class="wrap sec__head">
+    <div>
+      <p class="eyebrow" data-anim>afiliados</p>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>traes un cliente, cobras cada mes</span></h2>
+    </div>
+    <p class="lede reveal" style="--i:2" data-anim>
+      Si conoces un negocio al que esto le sirve, preséntanoslo. Cobras
+      cuando se instala y vuelves a cobrar todos los meses mientras
+      siga con nosotros. No tienes que vender ni explicar nada técnico.
+    </p>
+  </div>
+
+  <div class="wrap">
+    <div class="aff">
+      <div class="aff__c iris-border reveal" data-anim>
+        <span class="aff__k">al instalarlo</span>
+        <div class="aff__n"><span data-count="70" data-suffix=" mil">0</span></div>
+        <p class="aff__d">Pago único cuando el cliente queda funcionando, salga el plan que salga.</p>
+      </div>
+      <div class="aff__c iris-border reveal" style="--i:1" data-anim>
+        <span class="aff__k">cada mes · plan básico</span>
+        <div class="aff__n"><span data-count="50" data-suffix=" mil">0</span></div>
+        <p class="aff__d">Mientras el cliente siga activo, todos los meses, sin tope de tiempo.</p>
+      </div>
+      <div class="aff__c iris-border reveal" style="--i:2" data-anim>
+        <span class="aff__k">cada mes · plan pro</span>
+        <div class="aff__n"><span data-count="75" data-suffix=" mil">0</span></div>
+        <p class="aff__d">Si el cliente está en pro, tu pago mensual sube contigo sin hacer nada.</p>
+      </div>
+    </div>
+    <p class="note reveal" data-anim>
+      Tres clientes en plan pro son 225.000 al mes que entran solos.<br>
+      Nosotros hacemos la llamada, la instalación y el soporte.
+    </p>
   </div>
 </section>
 
@@ -626,23 +726,24 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec" id="contacto">
   <div class="wrap cta__grid">
     <div>
-      <p class="eyebrow" data-anim>auditoría gratuita</p>
-      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>dinos tu web y te contamos qué tiene abierto</span></h2>
+      <p class="eyebrow" data-anim>hablemos</p>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>cuéntanos de tu negocio y te lo mostramos</span></h2>
       <p class="lede reveal" style="--i:2;margin-top:22px" data-anim>
-        Revisamos tu página, te mandamos el informe y, si te interesa, hablamos.
-        Si no, te quedas con el informe igual.
+        Te enseñamos el asistente funcionando con los precios de tu negocio,
+        no con un ejemplo genérico. Si te convence, lo dejamos conectado
+        ese mismo día.
       </p>
       <p class="reveal" style="--i:3;margin-top:20px;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--fg-muted)" data-anim>
-        hola@tuempresa.com
+        hola@nulltrace.com
       </p>
     </div>
     <form class="form reveal" style="--i:2" id="form" data-anim novalidate>
       <div class="field"><label for="nombre">nombre</label><input id="nombre" name="nombre" type="text" required autocomplete="name"></div>
-      <div class="field"><label for="email">email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
-      <div class="field"><label for="web">tu web actual</label><input id="web" name="web" type="text" placeholder="tuempresa.com"></div>
-      <div class="field"><label for="msg">qué necesitas</label><textarea id="msg" name="mensaje"></textarea></div>
-      <button type="submit" class="btn" data-magnet data-cursor>pedir la auditoría</button>
-      <p class="form__note" id="formNote">Respondemos en menos de 24 horas laborables.</p>
+      <div class="field"><label for="negocio">tu negocio</label><input id="negocio" name="negocio" type="text" placeholder="peluquería canina, despacho, taller…"></div>
+      <div class="field"><label for="email">whatsapp o correo</label><input id="email" name="email" type="text" required autocomplete="email"></div>
+      <div class="field"><label for="msg">qué te gustaría que atendiera</label><textarea id="msg" name="mensaje"></textarea></div>
+      <button type="submit" class="btn" data-magnet data-cursor>pedir la demostración</button>
+      <p class="form__note" id="formNote">Respondemos el mismo día.</p>
     </form>
   </div>
 </section>
@@ -651,11 +752,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 <footer class="foot">
   <div class="wrap">
-    <div class="foot__word" data-parallax="-0.08">bastión</div>
+    <div class="foot__word" data-parallax="-0.08">nulltrace</div>
     <div class="foot__bottom">
-      <span>© 2026 BASTIÓN</span>
+      <span>© 2026 NULLTRACE · nulltrace.com</span>
       <nav class="foot__links">
-        <a href="#">aviso legal</a><a href="#">privacidad</a><a href="#">cookies</a><a href="#contacto">contacto</a>
+        <a href="#planes">planes</a><a href="#afiliados">afiliados</a><a href="#">privacidad</a><a href="#contacto">contacto</a>
       </nav>
     </div>
   </div>
