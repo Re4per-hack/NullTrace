@@ -403,8 +403,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
    INSTALACION Y AFILIADOS
    ============================================================ */
 .plan--once .plan__p{font-size:clamp(1.6rem,2.2vw,1.95rem)}
-.note{margin-top:26px;font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;
-  color:var(--fg-dim);line-height:1.9}
+.note{margin-top:34px;font-family:var(--display);font-size:clamp(1rem,1.25vw,1.08rem);
+  letter-spacing:-.01em;color:var(--fg-muted);line-height:1.75;max-width:64ch;
+  padding-left:20px;border-left:2px solid transparent;
+  border-image:linear-gradient(180deg,var(--iris-1),var(--iris-4)) 1}
+.note strong{color:var(--fg);font-weight:600}
 .aff{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
 .aff__c{background:var(--surface);border-radius:20px;padding:28px 26px;
   display:flex;flex-direction:column;gap:10px}
@@ -474,8 +477,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="float__l">Sin turnos ni festivos</div>
   </div>
   <div class="float f2" data-parallax="0.2">
-    <div class="float__n">Su número</div>
-    <div class="float__l">El mismo que ya usa</div>
+    <div class="float__n">Sin depender del celular</div>
+    <div class="float__l">Responde aunque esté apagado</div>
   </div>
   <div class="float f3" data-parallax="0.08">
     <div class="float__n">Su agenda</div>
@@ -489,9 +492,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <span class="line l3 split" data-split data-anim data-delay="520">24/7</span>
     </h1>
     <p class="hero__sub reveal" style="--i:9" data-anim>
-      Un asistente de inteligencia artificial que atiende el WhatsApp de su
-      negocio: informa precios, resuelve dudas, agenda citas en su calendario
-      y le avisa cuando la conversación necesita a una persona.
+      Mary es una asistente de inteligencia artificial que atiende el WhatsApp
+      de su negocio, informa precios, resuelve dudas, programa citas a sus
+      clientes y notifica cuando su cliente requiere atención personalizada
+      para una respuesta más precisa.
     </p>
     <div class="hero__cta reveal" style="--i:10" data-anim>
       <a href="#conversacion" class="btn" data-magnet data-cursor>Ver una conversación
@@ -548,7 +552,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
           <span class="card__idx">ATIENDE</span>
           <h3 class="h-md">Responde como su equipo</h3>
           <p class="card__body">Configuramos el asistente con sus servicios, sus precios y la forma de hablar de su negocio. Responde con frases naturales, sin sonar automático.</p>
-          <ul class="card__list"><li>Tono adaptado a su negocio</li><li>Disponible a cualquier hora</li><li>Aclara que es un asistente virtual</li></ul>
+          <ul class="card__list"><li>Tono adaptado a su negocio</li><li>Sigue atendiendo aunque su celular esté apagado o sin señal</li><li>Aclara que es un asistente virtual</li></ul>
         </article>
         <article class="card iris-border" data-cursor="VER">
           <span class="card__idx">AGENDA</span>
@@ -674,11 +678,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <span class="plan__p">$350.000<small>COP AL MES</small></span>
         <p class="plan__d">Todo lo necesario para que ninguna consulta se quede sin respuesta.</p>
         <ul>
-          <li>Asistente configurado con su información</li>
+          <li>Atención personalizada, con un trato cercano y cálido que se siente como hablar con alguien de su equipo</li>
           <li>Responde precios, servicios y preguntas frecuentes</li>
           <li>Agenda citas en su Google Calendar</li>
-          <li>Lo notifica cuando debe intervenir una persona</li>
+          <li>Lo notifica a su chat privado cuando debe intervenir en una conversación</li>
           <li>Conserva su número y su historial</li>
+          <li>Atiende sin interrupción, incluso con su celular apagado o sin señal</li>
         </ul>
         <a href="#contacto" class="btn btn--ghost" data-cursor>Solicitar</a>
       </div>
@@ -712,9 +717,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       </div>
     </div>
     <p class="note reveal" data-anim>
-      El primer pago es de $500.000 COP en el plan Básico y de $700.000 COP en el plan Pro,
-      porque incluyen la puesta en marcha.<br>
-      A partir del segundo mes, $350.000 COP y $550.000 COP respectivamente.
+      El primer pago es de <strong>$500.000 COP</strong> en el plan Básico y de <strong>$700.000 COP</strong> en el plan Pro, porque incluyen la puesta en marcha.<br>
+      A partir del segundo mes, <strong>$350.000 COP</strong> y <strong>$550.000 COP</strong> respectivamente.<br>
       Sin cláusula de permanencia: si decide retirarse, el número sigue siendo suyo.
     </p>
   </div>
@@ -780,7 +784,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     </div>
 
     <p class="note reveal" data-anim>
-      Tres clientes en plan Pro son $225.000 COP mensuales de ingreso recurrente.<br>
+      Tres clientes en plan Pro son <strong>$225.000 COP mensuales</strong> de ingreso recurrente.<br>
       Nosotros hacemos la llamada, la instalación y el soporte.
     </p>
 
