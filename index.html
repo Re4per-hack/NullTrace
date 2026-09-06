@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Bastión — Protege lo que construiste</title>
+<meta name="description" content="Diseñamos la web de tu empresa y la mantenemos a salvo. Auditoría de seguridad gratuita para pymes.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style"
+  href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..112,400..800&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'"
+  href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..112,400..800&family=JetBrains+Mono:wght@400&display=swap">
+<noscript><link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..112,400..800&family=JetBrains+Mono:wght@400&display=swap"></noscript>
+
+<style>
+/* ============================================================
+   1. TOKENS
+   Los colores iridiscentes viven también en el shader (ver CONFIG).
+   ============================================================ */
+:root{
+  --void:#000000;
+  --surface:#0A0A0D;
+  --surface-2:#101016;
+  --line:#1D1D25;
+
+  --iris-1:#B14BFF;   /* violeta */
+  --iris-2:#FF3D9A;   /* magenta */
+  --iris-3:#FF7A29;   /* naranja */
+  --iris-4:#35E8E0;   /* cian    */
+
+  --fg:#FFFFFF;
+  --fg-muted:#8E8E99;
+  --fg-dim:#5A5A66;
+
+  --display:'Archivo',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+
+  --gut:clamp(20px,5vw,64px);
+  --maxw:1320px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--void);color:var(--fg);
+  font-family:var(--display);font-weight:400;font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--iris-4);outline-offset:3px;border-radius:2px}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+
+/* Tipografía: minúscula, enorme, muy apretada — como la referencia */
+.h-xl,.h-lg,.h-md{font-family:var(--display);letter-spacing:-.045em;text-transform:lowercase}
+.h-xl{font-weight:600;font-variation-settings:'wdth' 100;font-size:clamp(3.4rem,12.5vw,10.5rem);line-height:.84}
+.h-lg{font-weight:600;font-size:clamp(2.3rem,6vw,4.6rem);line-height:.92}
+.h-md{font-weight:500;font-size:clamp(1.35rem,2.3vw,1.85rem);line-height:1.06;letter-spacing:-.03em}
+
+.eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--fg-dim);display:flex;align-items:center;gap:.8em}
+.eyebrow::before{content:'';width:22px;height:1px;flex:none;
+  background:linear-gradient(90deg,var(--iris-2),var(--iris-4));
+  transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease) .2s}
+.eyebrow.in::before{transform:scaleX(1)}
+.lede{font-size:clamp(.95rem,1.35vw,1.08rem);color:var(--fg-muted);max-width:46ch;line-height:1.68}
+
+/* Borde iridiscente reutilizable */
+.iris-border{position:relative}
+.iris-border::before{
+  content:'';position:absolute;top:0;right:0;bottom:0;left:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(135deg,var(--iris-1),var(--iris-2) 32%,var(--iris-3) 62%,var(--iris-4));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+          mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:.28;transition:opacity .55s var(--ease);
+}
+.iris-border:hover::before{opacity:.9}
+
+/* Animaciones de entrada */
+.split{display:inline-block}
+.split .word{display:inline-block;white-space:nowrap}
+.split .ch{display:inline-block;opacity:0;transform:translateY(.55em) rotateX(-70deg);
+  transform-origin:50% 100%;
+  transition:opacity .7s var(--ease-out),transform .95s var(--ease-out);
+  transition-delay:calc(var(--d,0) * 1ms)}
+.split.in .ch{opacity:1;transform:none}
+.reveal{opacity:0;transform:translateY(24px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+  transition-delay:calc(var(--i,0) * 80ms)}
+.reveal.in{opacity:1;transform:none}
+[data-skew]{will-change:transform}
+
+/* ============================================================
+   2. PRELOADER
+   ============================================================ */
+.pre{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;background:var(--void);display:flex;
+  align-items:flex-end;justify-content:space-between;padding:var(--gut);
+  transition:transform 1s var(--ease-out) .2s}
+.pre.done{transform:translateY(-101%)}
+.pre__n{font-family:var(--display);font-weight:600;font-size:clamp(4rem,17vw,12rem);
+  line-height:.8;letter-spacing:-.055em}
+.pre__l{font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--fg-dim);padding-bottom:1em}
+.pre__bar{position:absolute;left:0;bottom:0;height:2px;width:100%;transform:scaleX(0);
+  transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--iris-1),var(--iris-2),var(--iris-3),var(--iris-4))}
+
+/* ============================================================
+   3. CURSOR
+   ============================================================ */
+.cur,.cur-ring{position:fixed;top:0;left:0;z-index:150;pointer-events:none;border-radius:50%;
+  transform:translate3d(-50%,-50%,0)}
+.cur{width:5px;height:5px;background:#fff}
+.cur-ring{width:36px;height:36px;border:1px solid rgba(255,255,255,.28);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;color:transparent;
+  transition:width .4s var(--ease),height .4s var(--ease),background .4s,border-color .4s}
+.cur-ring.on{width:70px;height:70px;border-color:var(--iris-2);
+  background:radial-gradient(circle,rgba(255,61,154,.14),transparent 70%)}
+.cur-ring.label{color:#fff}
+@media (hover:none){.cur,.cur-ring{display:none}}
+
+/* ============================================================
+   4. NAV EN PÍLDORAS
+   ============================================================ */
+.nav{position:fixed;top:18px;right:0;bottom:auto;left:0;z-index:80;transition:transform .6s var(--ease),opacity .4s}
+.nav.hide{transform:translateY(-140%);opacity:0}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:16px}
+
+.pill{background:rgba(16,16,22,.72);backdrop-filter:blur(20px) saturate(1.5);
+  border:1px solid var(--line);border-radius:99px}
+
+.logo{display:flex;align-items:center;gap:9px;padding:11px 20px 11px 14px;
+  font-weight:600;font-size:.95rem;letter-spacing:-.02em}
+.logo__mark{width:20px;height:20px;flex:none;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--iris-1),var(--iris-2),var(--iris-3),var(--iris-4),var(--iris-1));
+  animation:spin 7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.nav__links{display:flex;gap:4px;padding:6px}
+.nav__links a{padding:8px 17px;border-radius:99px;font-family:var(--mono);font-size:.72rem;
+  letter-spacing:.06em;color:var(--fg-muted);transition:color .3s,background .3s}
+.nav__links a:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 24px;border-radius:99px;font-weight:500;font-size:.88rem;
+  background:#fff;color:#000;will-change:transform;transition:box-shadow .45s var(--ease)}
+.btn:hover{box-shadow:0 0 40px -6px rgba(255,255,255,.4)}
+.btn--ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn--ghost:hover{border-color:var(--fg-dim);box-shadow:none}
+.btn__arrow{transition:transform .4s var(--ease)}
+.btn:hover .btn__arrow{transform:translateX(4px)}
+
+.nav__toggle{display:none;width:44px;height:44px;align-items:center;justify-content:center;
+  border-radius:50%}
+.nav__toggle span{display:block;width:17px;height:1.5px;background:var(--fg);position:relative;transition:.3s}
+.nav__toggle span::before,.nav__toggle span::after{content:'';position:absolute;left:0;width:17px;
+  height:1.5px;background:var(--fg);transition:.35s var(--ease)}
+.nav__toggle span::before{top:-5px}.nav__toggle span::after{top:5px}
+.nav.open .nav__toggle span{background:transparent}
+.nav.open .nav__toggle span::before{top:0;transform:rotate(45deg)}
+.nav.open .nav__toggle span::after{top:0;transform:rotate(-45deg)}
+
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:90;transform-origin:0 50%;
+  transform:scaleX(0);
+  background:linear-gradient(90deg,var(--iris-1),var(--iris-2),var(--iris-3),var(--iris-4))}
+
+/* ============================================================
+   5. HERO — tipografía superpuesta sobre las burbujas
+   ============================================================ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;
+  padding-block:130px 90px;overflow:hidden}
+.hero__gl{width:100%;height:100%;position:absolute;top:0;right:0;bottom:0;left:0;z-index:0}
+/* Respaldo si WebGL no esta disponible: manchas iridiscentes animadas.
+   No es el shader, pero mantiene el mismo lenguaje visual. */
+.hero.nogl::before,.hero.nogl::after{
+  content:'';position:absolute;top:-18%;right:-18%;bottom:-18%;left:-18%;z-index:0;pointer-events:none;
+  filter:blur(80px);will-change:transform;
+}
+.hero.nogl::before{
+  opacity:.72;
+  background:
+    radial-gradient(32% 30% at 20% 28%, rgba(177,75,255,.95), transparent 68%),
+    radial-gradient(30% 27% at 72% 20%, rgba(255,61,154,.90), transparent 68%),
+    radial-gradient(26% 24% at 52% 58%, rgba(255,122,41,.70), transparent 68%);
+  animation:blobA 26s ease-in-out infinite alternate;
+}
+.hero.nogl::after{
+  opacity:.55;
+  background:
+    radial-gradient(30% 28% at 82% 68%, rgba(53,232,224,.85), transparent 68%),
+    radial-gradient(28% 26% at 30% 78%, rgba(177,75,255,.75), transparent 68%);
+  animation:blobB 34s ease-in-out infinite alternate;
+}
+@keyframes blobA{to{transform:translate3d(6%,-5%,0) scale(1.15)}}
+@keyframes blobB{to{transform:translate3d(-7%,4%,0) scale(1.12)}}
+.hero__in{position:relative;z-index:2;width:100%}
+
+.hero h1{perspective:900px}
+.hero h1 span.line{display:block}
+.hero h1 .l2{margin-left:30%}
+.hero h1 .l3{margin-left:9%}
+.hero h1 .dim{color:rgba(255,255,255,.42)}
+
+.hero__sub{max-width:34ch;margin-top:34px;color:var(--fg-muted);font-size:.95rem;line-height:1.65}
+.hero__cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+
+/* Datos flotando entre las burbujas */
+.float{position:absolute;z-index:2;pointer-events:none}
+.float__n{font-weight:600;font-size:clamp(1.3rem,2.4vw,2rem);letter-spacing:-.04em;line-height:1}
+.float__l{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-dim);margin-top:5px}
+.f1{top:16%;right:8%}
+.f2{top:54%;left:2%}
+.f3{bottom:15%;right:16%}
+
+/* ============================================================
+   6. MARQUESINA
+   ============================================================ */
+.marq{border-block:1px solid var(--line);padding-block:20px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marq__track{display:flex;gap:48px;width:max-content;will-change:transform}
+.marq__item{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:.75rem;
+  letter-spacing:.1em;color:var(--fg-dim);white-space:nowrap;text-transform:uppercase}
+.marq__item::before{content:'';width:5px;height:5px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg,var(--iris-2),var(--iris-4))}
+
+/* ============================================================
+   7. SECCIONES
+   ============================================================ */
+.sec{padding-block:clamp(80px,11vw,150px);position:relative}
+.sec__head{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,70px);align-items:end}
+
+/* Escena horizontal fijada */
+.pin{height:360vh;position:relative}
+.pin__sticky{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden}
+.pin__track{display:flex;gap:22px;padding-inline:var(--gut);will-change:transform}
+.card{flex:none;width:min(400px,80vw);background:var(--surface);border-radius:24px;padding:30px;
+  display:flex;flex-direction:column;gap:14px;min-height:400px;will-change:transform,opacity}
+.card__idx{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;
+  background:linear-gradient(90deg,var(--iris-2),var(--iris-4));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.card__body{color:var(--fg-muted);font-size:.92rem;line-height:1.65}
+.card__list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:auto;
+  font-size:.86rem;color:var(--fg-muted);font-family:var(--mono);letter-spacing:.02em}
+.card__list li{display:flex;gap:10px;align-items:flex-start}
+.card__list li::before{content:'';width:5px;height:5px;border-radius:50%;flex:none;margin-top:.55em;
+  background:var(--iris-3)}
+.pin__hint{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--fg-dim);position:absolute;bottom:42px;left:var(--gut)}
+
+/* Terminal */
+.audit__grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(34px,5vw,70px);align-items:center}
+.term{background:var(--surface);border-radius:18px;overflow:hidden;font-family:var(--mono);font-size:.8rem}
+.term__bar{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line)}
+.term__dot{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.term__name{margin-left:8px;font-size:.7rem;color:var(--fg-dim);letter-spacing:.08em}
+.term__body{padding:20px 18px;display:flex;flex-direction:column;gap:9px;min-height:300px}
+.term__line{opacity:0;transform:translateX(-8px);transition:.45s var(--ease);
+  display:flex;gap:10px;align-items:baseline;line-height:1.5}
+.term__line.on{opacity:1;transform:none}
+.term__tag{flex:none;font-size:.64rem;letter-spacing:.12em;padding:2px 7px;border-radius:4px}
+.t-scan{background:rgba(177,75,255,.16);color:var(--iris-1)}
+.t-risk{background:rgba(255,61,154,.14);color:var(--iris-2)}
+.t-ok{background:rgba(53,232,224,.13);color:var(--iris-4)}
+.term__txt{color:var(--fg-muted)}
+.term__cursor{width:7px;height:14px;background:var(--iris-4);display:inline-block;
+  animation:blink 1s steps(2) infinite;align-self:flex-start}
+@keyframes blink{50%{opacity:0}}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin-top:clamp(48px,7vw,86px);border-top:1px solid var(--line);padding-top:32px}
+.stat__n{font-weight:600;font-size:clamp(2rem,3.8vw,3rem);letter-spacing:-.045em;line-height:1}
+.stat__l{color:var(--fg-muted);font-size:.86rem;margin-top:8px;line-height:1.55}
+
+/* Proceso */
+.proc__list{margin-top:52px;position:relative;padding-left:clamp(22px,5vw,60px)}
+.proc__spine{position:absolute;left:0;top:6px;bottom:6px;width:1px;background:var(--line)}
+.proc__spine::after{content:'';position:absolute;top:0;right:0;bottom:auto;left:0;height:var(--fill,0%);
+  background:linear-gradient(180deg,var(--iris-1),var(--iris-2),var(--iris-3),var(--iris-4))}
+.step{display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,44px);padding-block:28px;
+  border-bottom:1px solid var(--line);align-items:start}
+.step:last-child{border-bottom:0}
+.step__n{font-family:var(--mono);font-size:.72rem;color:var(--fg-dim);letter-spacing:.16em;padding-top:7px}
+.step__t{font-weight:500;font-size:clamp(1.2rem,2.1vw,1.6rem);letter-spacing:-.03em;text-transform:lowercase}
+.step__d{color:var(--fg-muted);margin-top:8px;max-width:58ch;font-size:.93rem}
+.step__meta{font-family:var(--mono);font-size:.68rem;margin-top:11px;letter-spacing:.1em;color:var(--iris-4)}
+
+/* Precios */
+.price{background:var(--surface);border-block:1px solid var(--line)}
+.price__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
+.plan{background:var(--void);border-radius:22px;padding:30px;display:flex;flex-direction:column;
+  gap:16px;position:relative;will-change:transform}
+.plan--hero::before{opacity:.85}
+.plan__badge{position:absolute;top:-10px;left:28px;font-family:var(--mono);font-size:.6rem;
+  letter-spacing:.16em;padding:5px 12px;border-radius:99px;color:#000;
+  background:linear-gradient(90deg,var(--iris-3),var(--iris-2))}
+.plan__name{font-weight:500;font-size:1.2rem;letter-spacing:-.03em;text-transform:lowercase}
+.plan__p{font-weight:600;font-size:2.3rem;letter-spacing:-.05em;line-height:1}
+.plan__p small{font-family:var(--mono);font-size:.7rem;font-weight:400;color:var(--fg-dim);letter-spacing:.06em}
+.plan__d{color:var(--fg-muted);font-size:.89rem;line-height:1.6}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:9px;font-size:.86rem;margin-top:4px}
+.plan li{display:flex;gap:10px;align-items:flex-start;color:var(--fg-muted)}
+.plan li::before{content:'';width:5px;height:5px;border-radius:50%;flex:none;margin-top:.55em;
+  background:linear-gradient(135deg,var(--iris-2),var(--iris-4))}
+.plan .btn{margin-top:auto}
+
+/* Contacto */
+.cta__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(38px,6vw,88px);align-items:start}
+.form{display:flex;flex-direction:column;gap:15px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-dim)}
+.field input,.field textarea{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:14px 15px;color:var(--fg);font-family:var(--display);font-size:.95rem;
+  transition:border-color .3s,background .3s}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--iris-1);background:var(--surface-2)}
+.field textarea{resize:vertical;min-height:105px}
+.form__note{font-size:.8rem;color:var(--fg-dim)}
+.form .btn{padding-block:15px}
+
+/* Footer */
+.foot{border-top:1px solid var(--line);padding-block:52px 32px;overflow:hidden}
+.foot__word{font-weight:700;font-variation-settings:'wdth' 112;font-size:clamp(3rem,17vw,14rem);
+  line-height:.82;letter-spacing:-.055em;text-transform:lowercase;white-space:nowrap;
+  background:linear-gradient(100deg,var(--iris-1),var(--iris-2) 30%,var(--iris-3) 60%,var(--iris-4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;opacity:.5;
+  margin-block:24px 36px;user-select:none}
+.foot__bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--fg-dim)}
+.foot__links{display:flex;gap:20px;flex-wrap:wrap}
+.foot__links a:hover{color:var(--fg)}
+
+/* ============================================================
+   8. RESPONSIVE
+   ============================================================ */
+@media (max-width:1000px){
+  .sec__head,.audit__grid,.cta__grid{grid-template-columns:1fr}
+  .price__grid{grid-template-columns:1fr}
+  .hero h1 .l2{margin-left:18%}
+  .hero h1 .l3{margin-left:5%}
+  .float{display:none}
+}
+@media (max-width:760px){
+  .nav__links{position:fixed;top:76px;right:var(--gut);bottom:auto;left:var(--gut);flex-direction:column;gap:2px;
+    padding:12px;border-radius:24px;transform:translateY(-130%);opacity:0;
+    transition:transform .55s var(--ease),opacity .3s}
+  .nav.open .nav__links{transform:none;opacity:1}
+  .nav__links a{padding:14px 18px;font-size:.85rem}
+  .nav__cta{display:none}
+  .nav__toggle{display:flex}
+  .pin{height:auto}
+  .pin__sticky{position:static;height:auto;display:block;padding-block:40px}
+  .pin__track{flex-direction:column;transform:none!important;width:auto}
+  .card{width:auto;min-height:0;transform:none!important;opacity:1!important}
+  .pin__hint{display:none}
+  .stats{grid-template-columns:1fr}
+  .stat{border-top:1px solid var(--line);padding-top:16px}
+}
+
+/* ============================================================
+   9. MOVIMIENTO REDUCIDO
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important}
+  .reveal,.split .ch{opacity:1;transform:none}
+  .term__line{opacity:1;transform:none}
+  .pin{height:auto}
+  .pin__sticky{position:static;height:auto;padding-block:40px}
+  .pin__track{flex-direction:column;transform:none!important;width:auto}
+  .card{width:auto;min-height:0;transform:none!important;opacity:1!important}
+  .hero__gl,.pre,.cur,.cur-ring{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="pre" id="pre">
+  <span class="pre__n" id="preN">0</span>
+  <span class="pre__l">Bastión · cargando</span>
+  <span class="pre__bar" id="preBar"></span>
+</div>
+
+<div class="cur" id="cur" aria-hidden="true"></div>
+<div class="cur-ring" id="curRing" aria-hidden="true"></div>
+<div class="progress" id="progress"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a href="#" class="logo pill" data-cursor><span class="logo__mark"></span>bastión</a>
+    <nav class="nav__links pill" id="navLinks">
+      <a href="#servicios">servicios</a>
+      <a href="#seguridad">seguridad</a>
+      <a href="#proceso">proceso</a>
+      <a href="#precios">precios</a>
+    </nav>
+    <a href="#contacto" class="btn nav__cta" data-magnet data-cursor>empezar</a>
+    <button class="nav__toggle pill" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas class="hero__gl" id="gl" aria-hidden="true"></canvas>
+
+  <div class="float f1" data-parallax="0.12">
+    <div class="float__n"><span data-count="180" data-prefix="+">0</span></div>
+    <div class="float__l">webs protegidas</div>
+  </div>
+  <div class="float f2" data-parallax="0.2">
+    <div class="float__n"><span data-count="99.9" data-dec="1" data-suffix="%">0%</span></div>
+    <div class="float__l">uptime medio</div>
+  </div>
+  <div class="float f3" data-parallax="0.08">
+    <div class="float__n">24/7</div>
+    <div class="float__l">vigilancia activa</div>
+  </div>
+
+  <div class="wrap hero__in">
+    <h1 class="h-xl">
+      <span class="line l1 split" data-split data-anim>protege</span>
+      <span class="line l2 split dim" data-split data-anim data-delay="260">lo que</span>
+      <span class="line l3 split" data-split data-anim data-delay="520">construiste</span>
+    </h1>
+    <p class="hero__sub reveal" style="--i:9" data-anim>
+      Diseñamos la web de tu empresa y la mantenemos a salvo.
+      Precio cerrado, código propio y la parte de seguridad
+      que las agencias baratas se saltan.
+    </p>
+    <div class="hero__cta reveal" style="--i:10" data-anim>
+      <a href="#contacto" class="btn" data-magnet data-cursor>auditoría gratis
+        <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#servicios" class="btn btn--ghost" data-magnet data-cursor>ver servicios</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUESINA -->
+<div class="marq" aria-hidden="true">
+  <div class="marq__track" id="marqTrack">
+    <span class="marq__item">clínicas</span>
+    <span class="marq__item">despachos de abogados</span>
+    <span class="marq__item">asesorías</span>
+    <span class="marq__item">automoción</span>
+    <span class="marq__item">tiendas online</span>
+    <span class="marq__item">restauración</span>
+    <span class="marq__item">inmobiliarias</span>
+    <span class="marq__item">constructoras</span>
+    <span class="marq__item">academias</span>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section class="sec" id="servicios">
+  <div class="wrap sec__head">
+    <div>
+      <p class="eyebrow" data-anim>01 — lo visible</p>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>la web que ven tus clientes</span></h2>
+    </div>
+    <p class="lede reveal" style="--i:2" data-anim>
+      Nada de plantillas recicladas. Diseñamos cada página alrededor de lo que
+      vende tu negocio y la construimos para que cargue rápido con mala cobertura.
+    </p>
+  </div>
+
+  <div class="pin" id="pin">
+    <div class="pin__sticky">
+      <div class="pin__track" id="pinTrack">
+        <article class="card iris-border" data-cursor="VER">
+          <span class="card__idx">DISEÑO</span>
+          <h3 class="h-md">identidad a medida</h3>
+          <p class="card__body">Partimos de tu sector, tus clientes y lo que hace la competencia. Ves maquetas reales antes de que escribamos una línea de código.</p>
+          <ul class="card__list"><li>maquetas en 72 horas</li><li>dos rondas de cambios</li><li>diseño móvil primero</li></ul>
+        </article>
+        <article class="card iris-border" data-cursor="VER">
+          <span class="card__idx">DESARROLLO</span>
+          <h3 class="h-md">código propio, sin lastre</h3>
+          <p class="card__body">Sin veinte plugins peleándose entre sí. Menos código son menos cosas que se rompen y menos puertas abiertas.</p>
+          <ul class="card__list"><li>carga bajo 1,5 s</li><li>panel para editar todo</li><li>accesible y bien estructurada</li></ul>
+        </article>
+        <article class="card iris-border" data-cursor="VER">
+          <span class="card__idx">VISIBILIDAD</span>
+          <h3 class="h-md">que te encuentren</h3>
+          <p class="card__body">SEO técnico de base, ficha de Google en condiciones y analítica que puedes leer sin ser analista de datos.</p>
+          <ul class="card__list"><li>SEO técnico y contenidos</li><li>Google Business configurado</li><li>informe mensual de una página</li></ul>
+        </article>
+        <article class="card iris-border" data-cursor="VER">
+          <span class="card__idx">ENTREGA</span>
+          <h3 class="h-md">tuya de verdad</h3>
+          <p class="card__body">Dominio, hosting y código a tu nombre. Si algún día te vas, te llevas todo. No secuestramos proyectos.</p>
+          <ul class="card__list"><li>accesos a tu nombre desde el día uno</li><li>formación al entregar</li><li>sin permanencia</li></ul>
+        </article>
+      </div>
+      <span class="pin__hint">sigue bajando →</span>
+    </div>
+  </div>
+</section>
+
+<!-- SEGURIDAD -->
+<section class="sec" id="seguridad">
+  <div class="wrap">
+    <div class="audit__grid">
+      <div>
+        <p class="eyebrow" data-anim>02 — lo invisible</p>
+        <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>lo que revisamos antes que otro</span></h2>
+        <p class="lede reveal" style="--i:2;margin-top:22px" data-anim>
+          Casi todas las webs de pyme que auditamos llevan meses con algo abierto:
+          un plugin sin actualizar, un panel expuesto, copias que nadie ha probado
+          a restaurar. Lo miramos gratis y te decimos qué hay.
+        </p>
+        <a href="#contacto" class="btn reveal" style="--i:3;margin-top:28px" data-anim data-magnet data-cursor>auditar mi web
+          <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="term iris-border reveal" style="--i:2" data-anim data-skew="0.3">
+        <div class="term__bar">
+          <span class="term__dot"></span><span class="term__dot"></span><span class="term__dot"></span>
+          <span class="term__name">auditoria — tu-empresa.com</span>
+        </div>
+        <div class="term__body" id="termBody">
+          <div class="term__line"><span class="term__tag t-scan">SCAN</span><span class="term__txt">revisando cabeceras de seguridad…</span></div>
+          <div class="term__line"><span class="term__tag t-risk">RIESGO</span><span class="term__txt">panel de administración accesible desde internet</span></div>
+          <div class="term__line"><span class="term__tag t-risk">RIESGO</span><span class="term__txt">gestor de contenidos 3 versiones por detrás</span></div>
+          <div class="term__line"><span class="term__tag t-risk">RIESGO</span><span class="term__txt">copias sin verificar desde hace 214 días</span></div>
+          <div class="term__line"><span class="term__tag t-scan">SCAN</span><span class="term__txt">comprobando certificado y redirecciones…</span></div>
+          <div class="term__line"><span class="term__tag t-ok">OK</span><span class="term__txt">acceso restringido y doble factor activado</span></div>
+          <div class="term__line"><span class="term__tag t-ok">OK</span><span class="term__txt">copias diarias, restauración probada</span></div>
+          <div class="term__line"><span class="term__tag t-ok">OK</span><span class="term__txt">vigilancia activa 24/7</span></div>
+          <div class="term__line"><span class="term__tag t-ok">OK</span><span class="term__txt">informe enviado — 3 riesgos corregidos</span></div>
+          <span class="term__cursor"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat reveal" data-anim><div class="stat__n"><span data-count="63" data-suffix="%">0%</span></div><p class="stat__l">de las webs que auditamos tenían un riesgo alto sin resolver</p></div>
+      <div class="stat reveal" style="--i:1" data-anim><div class="stat__n"><span data-count="15" data-suffix=" min">0</span></div><p class="stat__l">desde que detectamos un incidente hasta que te avisamos</p></div>
+      <div class="stat reveal" style="--i:2" data-anim><div class="stat__n"><span data-count="0">0</span></div><p class="stat__l">webs con mantenimiento nuestro comprometidas hasta hoy</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="sec" id="proceso">
+  <div class="wrap">
+    <p class="eyebrow" data-anim>cómo trabajamos</p>
+    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>cuatro pasos, sin sorpresas</span></h2>
+    <div class="proc__list" id="procList">
+      <div class="proc__spine" id="procSpine"></div>
+      <div class="step reveal" data-anim>
+        <span class="step__n">01</span>
+        <div><h3 class="step__t">auditamos lo que ya tienes</h3>
+        <p class="step__d">Miramos tu web actual, tu posicionamiento y tus riesgos abiertos. Informe en lenguaje normal, sin coste y sin compromiso.</p>
+        <p class="step__meta">2 DÍAS · GRATIS</p></div>
+      </div>
+      <div class="step reveal" style="--i:1" data-anim>
+        <span class="step__n">02</span>
+        <div><h3 class="step__t">diseñamos y te lo enseñamos</h3>
+        <p class="step__d">Recibes maquetas reales de tu web, no bocetos genéricos. Cambiamos lo que haga falta antes de construir nada.</p>
+        <p class="step__meta">72 HORAS PARA LA PRIMERA VERSIÓN</p></div>
+      </div>
+      <div class="step reveal" style="--i:2" data-anim>
+        <span class="step__n">03</span>
+        <div><h3 class="step__t">construimos y blindamos</h3>
+        <p class="step__d">Desarrollo, contenidos, velocidad y configuración de seguridad en el mismo paquete. Sale a producción ya protegida.</p>
+        <p class="step__meta">2 A 4 SEMANAS SEGÚN TAMAÑO</p></div>
+      </div>
+      <div class="step reveal" style="--i:3" data-anim>
+        <span class="step__n">04</span>
+        <div><h3 class="step__t">vigilamos cada día</h3>
+        <p class="step__d">Actualizaciones, copias verificadas y monitorización. Si algo falla lo sabemos antes que tú, y lo arreglamos.</p>
+        <p class="step__meta">CONTINUO · SIN PERMANENCIA</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="sec price" id="precios">
+  <div class="wrap">
+    <p class="eyebrow" data-anim>precios</p>
+    <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>lo que cuesta, dicho antes</span></h2>
+    <div class="price__grid">
+      <div class="plan iris-border reveal" data-anim data-magnet="0.05">
+        <span class="plan__name">esencial</span>
+        <span class="plan__p">890 €<small> PAGO ÚNICO</small></span>
+        <p class="plan__d">Para negocios que solo necesitan estar bien presentados y que les llamen.</p>
+        <ul><li>hasta 5 secciones</li><li>diseño a medida y textos</li><li>formulario y Google Business</li><li>certificado y copias configuradas</li></ul>
+        <a href="#contacto" class="btn btn--ghost" data-cursor>empezar</a>
+      </div>
+      <div class="plan plan--hero iris-border reveal" style="--i:1" data-anim data-magnet="0.05">
+        <span class="plan__badge">MÁS ELEGIDO</span>
+        <span class="plan__name">profesional</span>
+        <span class="plan__p">1.900 €<small> PAGO ÚNICO</small></span>
+        <p class="plan__d">Para empresas que usan la web como canal de venta y quieren poder editarla.</p>
+        <ul><li>páginas ilimitadas y blog</li><li>panel para editarlo todo</li><li>SEO técnico y analítica</li><li>auditoría de seguridad completa</li><li>3 meses de vigilancia incluidos</li></ul>
+        <a href="#contacto" class="btn" data-cursor>empezar</a>
+      </div>
+      <div class="plan iris-border reveal" style="--i:2" data-anim data-magnet="0.05">
+        <span class="plan__name">escudo</span>
+        <span class="plan__p">79 €<small> AL MES</small></span>
+        <p class="plan__d">Mantenimiento y seguridad continuos. También si tu web la hizo otro.</p>
+        <ul><li>actualizaciones y parches</li><li>copias diarias verificadas</li><li>monitorización 24/7</li><li>cambios pequeños incluidos</li></ul>
+        <a href="#contacto" class="btn btn--ghost" data-cursor>contratar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="sec" id="contacto">
+  <div class="wrap cta__grid">
+    <div>
+      <p class="eyebrow" data-anim>auditoría gratuita</p>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>dinos tu web y te contamos qué tiene abierto</span></h2>
+      <p class="lede reveal" style="--i:2;margin-top:22px" data-anim>
+        Revisamos tu página, te mandamos el informe y, si te interesa, hablamos.
+        Si no, te quedas con el informe igual.
+      </p>
+      <p class="reveal" style="--i:3;margin-top:20px;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--fg-muted)" data-anim>
+        hola@tuempresa.com
+      </p>
+    </div>
+    <form class="form reveal" style="--i:2" id="form" data-anim novalidate>
+      <div class="field"><label for="nombre">nombre</label><input id="nombre" name="nombre" type="text" required autocomplete="name"></div>
+      <div class="field"><label for="email">email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      <div class="field"><label for="web">tu web actual</label><input id="web" name="web" type="text" placeholder="tuempresa.com"></div>
+      <div class="field"><label for="msg">qué necesitas</label><textarea id="msg" name="mensaje"></textarea></div>
+      <button type="submit" class="btn" data-magnet data-cursor>pedir la auditoría</button>
+      <p class="form__note" id="formNote">Respondemos en menos de 24 horas laborables.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__word" data-parallax="-0.08">bastión</div>
+    <div class="foot__bottom">
+      <span>© 2026 BASTIÓN</span>
+      <nav class="foot__links">
+        <a href="#">aviso legal</a><a href="#">privacidad</a><a href="#">cookies</a><a href="#contacto">contacto</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+const CONFIG = {
+  scrollEase: 0.085,
+  skewMax: 4.5,
+  bubbleQuality: 0.55,   // resolución interna del shader (0.4–1.0)
+};
+
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const touch = matchMedia('(hover: none)').matches;
+const isSmall = () => innerWidth <= 760;
+const lerp = (a,b,t) => a + (b-a)*t;
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+
+/* ---------- SMOOTH SCROLL CON INERCIA ---------- */
+const S = { target: scrollY, current: scrollY, velocity: 0, running: false };
+const maxScroll = () => document.documentElement.scrollHeight - innerHeight;
+
+const inIframe = (() => { try { return self !== top; } catch(e) { return true; } })();
+
+if (!reduced && !touch && !inIframe) {
+  addEventListener('wheel', e => {
+    if (e.ctrlKey) return;
+    e.preventDefault();
+    S.target = clamp(S.target + e.deltaY, 0, maxScroll());
+    if (!S.running) { S.running = true; requestAnimationFrame(loop); }
+  }, { passive:false });
+  addEventListener('scroll', () => { if (!S.running) S.target = S.current = scrollY; }, { passive:true });
+
+  function loop(){
+    const prev = S.current;
+    S.current = lerp(S.current, S.target, CONFIG.scrollEase);
+    S.velocity = S.current - prev;
+    if (Math.abs(S.target - S.current) < 0.4) { S.current = S.target; S.running = false; S.velocity = 0; }
+    scrollTo(0, S.current); frame();
+    if (S.running) requestAnimationFrame(loop);
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') { e.preventDefault(); S.target = 0; }
+    else { const t = document.querySelector(id); if (!t) return; e.preventDefault();
+      S.target = clamp(t.getBoundingClientRect().top + S.current - 60, 0, maxScroll()); }
+    if (!S.running) { S.running = true; requestAnimationFrame(loop); }
+  }));
+} else {
+  addEventListener('scroll', () => { S.velocity = scrollY - S.current; S.current = S.target = scrollY; frame(); }, { passive:true });
+}
+
+/* ---------- BUCLE MAESTRO ---------- */
+const nav = document.getElementById('nav');
+const bar = document.getElementById('progress');
+const spine = document.getElementById('procSpine');
+const procList = document.getElementById('procList');
+const pin = document.getElementById('pin');
+const pinTrack = document.getElementById('pinTrack');
+const cards = pinTrack ? [...pinTrack.children] : [];
+const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
+const skewEls = [...document.querySelectorAll('[data-skew]')];
+const marqTrack = document.getElementById('marqTrack');
+let lastY = 0, marqX = 0, marqW = 0, skewNow = 0;
+
+function frame(){
+  const y = S.current, mx = maxScroll(), p = mx > 0 ? y/mx : 0;
+  nav.classList.toggle('hide', y > 400 && y > lastY + 2 && !nav.classList.contains('open'));
+  lastY = y;
+  bar.style.transform = 'scaleX(' + p + ')';
+
+  if (!reduced) parallaxEls.forEach(el =>
+    el.style.transform = 'translate3d(0,' + (y*parseFloat(el.dataset.parallax)) + 'px,0)');
+
+  if (!reduced) {
+    skewNow = lerp(skewNow, clamp(S.velocity*0.06, -CONFIG.skewMax, CONFIG.skewMax), 0.12);
+    skewEls.forEach(el => el.style.transform = 'skewY(' + (skewNow*parseFloat(el.dataset.skew||1)) + 'deg)');
+  }
+
+  if (spine && procList) {
+    const r = procList.getBoundingClientRect();
+    spine.style.setProperty('--fill', clamp((innerHeight*0.72 - r.top)/r.height, 0, 1)*100 + '%');
+  }
+
+  if (pin && pinTrack && !isSmall() && !reduced) {
+    const r = pin.getBoundingClientRect();
+    const prog = clamp(-r.top/(pin.offsetHeight - innerHeight), 0, 1);
+    pinTrack.style.transform = 'translate3d(' + (-(pinTrack.scrollWidth - innerWidth)*prog) + 'px,0,0)';
+    const cx = innerWidth/2;
+    cards.forEach(c => {
+      const b = c.getBoundingClientRect();
+      const d = clamp(Math.abs((b.left + b.width/2) - cx)/(innerWidth*0.75), 0, 1);
+      c.style.transform = 'scale(' + (1 - d*0.11) + ') rotate(' + (d*1.4) + 'deg)';
+      c.style.opacity = String(1 - d*0.45);
+    });
+  }
+
+  if (marqTrack && !reduced) {
+    if (!marqW) marqW = marqTrack.scrollWidth/2;
+    marqX -= 0.65 + S.velocity*0.2;
+    if (marqX <= -marqW) marqX += marqW;
+    if (marqX > 0) marqX -= marqW;
+    marqTrack.style.transform = 'translate3d(' + marqX + 'px,0,0)';
+  }
+}
+(function idle(){ if (!S.running) frame(); requestAnimationFrame(idle); })();
+addEventListener('resize', () => { marqW = 0; frame(); });
+
+/* ---------- TEXTO POR CARACTERES ---------- */
+document.querySelectorAll('[data-split]').forEach(el => {
+  const base = parseInt(el.dataset.delay || '0', 10);
+  const words = el.textContent.split(' ');
+  el.textContent = ''; let n = 0;
+  words.forEach((w, wi) => {
+    const ws = document.createElement('span'); ws.className = 'word';
+    [...w].forEach(ch => {
+      const s = document.createElement('span');
+      s.className = 'ch'; s.textContent = ch;
+      s.style.setProperty('--d', base + n*26); n++;
+      ws.appendChild(s);
+    });
+    el.appendChild(ws);
+    if (wi < words.length - 1) el.appendChild(document.createTextNode(' '));
+  });
+});
+
+/* ---------- ENTRADA ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('[data-anim]').forEach(el => io.observe(el));
+
+/* ---------- CURSOR + MAGNETISMO ---------- */
+if (!touch && !reduced) {
+  const cur = document.getElementById('cur'), ring = document.getElementById('curRing');
+  let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+  addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.transform = 'translate3d(' + (mx-2.5) + 'px,' + (my-2.5) + 'px,0)';
+  }, { passive:true });
+  (function r(){ rx = lerp(rx,mx,.16); ry = lerp(ry,my,.16);
+    ring.style.transform = 'translate3d(' + (rx-18) + 'px,' + (ry-18) + 'px,0)';
+    requestAnimationFrame(r); })();
+
+  document.querySelectorAll('[data-cursor]').forEach(el => {
+    const label = el.dataset.cursor;
+    el.addEventListener('mouseenter', () => {
+      ring.classList.add('on');
+      if (label) { ring.textContent = label; ring.classList.add('label'); }
+    });
+    el.addEventListener('mouseleave', () => { ring.classList.remove('on','label'); ring.textContent = ''; });
+  });
+
+  document.querySelectorAll('[data-magnet]').forEach(el => {
+    const k = parseFloat(el.dataset.magnet) || 0.26;
+    let tx=0, ty=0, cx=0, cy=0, active=false;
+    el.addEventListener('mousemove', e => {
+      const b = el.getBoundingClientRect();
+      tx = (e.clientX - (b.left + b.width/2))*k;
+      ty = (e.clientY - (b.top + b.height/2))*k;
+      if (!active) { active = true; mag(); }
+    });
+    el.addEventListener('mouseleave', () => { tx = 0; ty = 0; });
+    function mag(){
+      cx = lerp(cx,tx,.18); cy = lerp(cy,ty,.18);
+      el.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
+      if (Math.abs(cx-tx) < .1 && Math.abs(cy-ty) < .1 && tx === 0) { active = false; el.style.transform=''; return; }
+      requestAnimationFrame(mag);
+    }
+  });
+}
+
+/* ---------- PRELOADER ---------- */
+const pre = document.getElementById('pre'), preN = document.getElementById('preN'), preBar = document.getElementById('preBar');
+const start = () => document.querySelectorAll('.hero [data-anim]').forEach(el => el.classList.add('in'));
+
+if (reduced) { pre.remove(); start(); }
+else {
+  let v = 0, closed = false;
+  const finish = () => {
+    if (closed) return; closed = true; clearInterval(tick);
+    preN.textContent = '100'; preBar.style.transform = 'scaleX(1)';
+    pre.classList.add('done'); start(); setTimeout(() => pre.remove(), 1500);
+  };
+  const tick = setInterval(() => {
+    v = Math.min(92, v + Math.random()*16 + 7);
+    preN.textContent = Math.round(v); preBar.style.transform = 'scaleX(' + v/100 + ')';
+  }, 70);
+  Promise.all([
+    document.fonts ? document.fonts.ready : Promise.resolve(),
+    new Promise(r => document.readyState === 'complete' ? r() : addEventListener('load', r, { once:true }))
+  ]).then(finish);
+  setTimeout(finish, 2500);
+}
+
+/* ---------- CONTADORES ---------- */
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  cio.unobserve(e.target);
+  const n = e.target, to = parseFloat(n.dataset.count);
+  const dec = parseInt(n.dataset.dec||'0',10), suf = n.dataset.suffix||'', pfx = n.dataset.prefix||'';
+  if (reduced || to === 0) { n.textContent = pfx + to.toFixed(dec) + suf; return; }
+  const t0 = performance.now();
+  (function s(t){
+    const k = Math.min(1,(t-t0)/1500), e2 = 1 - Math.pow(1-k,3);
+    n.textContent = pfx + (to*e2).toFixed(dec) + suf;
+    if (k < 1) requestAnimationFrame(s);
+  })(t0);
+}), { threshold: 0.6 });
+document.querySelectorAll('[data-count]').forEach(n => cio.observe(n));
+
+/* ---------- TERMINAL ---------- */
+const termBody = document.getElementById('termBody');
+if (termBody) {
+  const tio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; tio.unobserve(e.target);
+    termBody.querySelectorAll('.term__line').forEach((l,i) =>
+      setTimeout(() => l.classList.add('on'), reduced ? 0 : 250*i));
+  }), { threshold: 0.4 });
+  tio.observe(termBody);
+}
+
+/* ---------- MENÚ MÓVIL ---------- */
+const toggle = document.getElementById('navToggle');
+toggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', String(open));
+});
+document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+/* ---------- FORMULARIO ---------- */
+const form = document.getElementById('form'), note = document.getElementById('formNote');
+form.addEventListener('submit', ev => {
+  ev.preventDefault();
+  const nombre = form.nombre.value.trim(), email = form.email.value.trim();
+  if (!nombre || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    note.textContent = 'Falta el nombre o el email no tiene formato válido.';
+    note.style.color = 'var(--iris-2)'; return;
+  }
+  note.textContent = 'Recibido. Te escribimos en menos de 24 horas laborables.';
+  note.style.color = 'var(--iris-4)';
+  form.reset();
+});
+
+/* ============================================================
+   BURBUJAS IRIDISCENTES — shader de interferencia de película fina
+   Metaballs deformados por ruido. El color sale de una paleta
+   cosenoidal cuyo argumento simula el grosor de la película de jabón:
+   por eso el borde es un arcoíris y el centro queda casi negro.
+   ============================================================ */
+(function bubbles(){
+  if (reduced) return;
+  if (navigator.connection && navigator.connection.saveData) return;
+  if (document.readyState !== 'complete') { addEventListener('load', bubbles, { once:true }); return; }
+
+  const cv = document.getElementById('gl');
+  const gl = cv.getContext('webgl', { antialias:false, alpha:true, powerPreference:'low-power' })
+          || cv.getContext('experimental-webgl');
+  /* fallback() esta definido mas abajo; las declaraciones de funcion suben */
+  if (!gl) { fallback('WebGL no disponible en este contexto'); return; }
+
+  const VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+
+  /* IMPORTANTE: solo ASCII aqui dentro. Algunos drivers rechazan el GLSL
+     si encuentra acentos o simbolos raros, incluso dentro de comentarios. */
+  const FS = [
+'precision highp float;',
+'uniform vec2 u_res; uniform float u_t; uniform vec2 u_m; uniform float u_sc;',
+'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+'float noise(vec2 p){',
+'  vec2 i=floor(p),f=fract(p); vec2 u=f*f*(3.0-2.0*f);',
+'  return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),u.x),',
+'             mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0,1.0)),u.x),u.y);',
+'}',
+'float fbm(vec2 p){',
+'  float v=0.0,a=0.5;',
+'  for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.02+vec2(3.1,1.7);a*=0.5;}',
+'  return v;',
+'}',
+/* Paleta cosenoidal: el arco iris de una pompa de jabon */
+'vec3 iris(float t){',
+'  vec3 c = 0.5 + 0.5*cos(6.28318*(t + vec3(0.0,0.33,0.67)));',
+'  return c*vec3(1.12,0.72,1.18);',
+'}',
+'void main(){',
+'  if (u_res.x < 1.0 || u_res.y < 1.0) { gl_FragColor = vec4(0.0); return; }',
+'  float asp = u_res.x/u_res.y;',
+'  vec2 p = (gl_FragCoord.xy*2.0 - u_res)/u_res.y;',
+'  p += u_m*0.14;',
+/* Deformacion organica: nada de circulos perfectos */
+'  vec2 w = vec2(fbm(p*1.3 + u_t*0.05), fbm(p*1.3 + vec2(4.2,2.3) - u_t*0.04));',
+'  p += (w-0.5)*0.55;',
+/* Campo de metaballs repartido por todo el ancho (de ahi el aspecto) */
+'  float f = 0.0;',
+'  for(int i=0;i<7;i++){',
+'    float fi = float(i);',
+'    float sx = sin(fi*2.13)*0.95;',
+'    float sy = cos(fi*1.37)*0.72;',
+'    vec2 c = vec2((sx + sin(u_t*0.10 + fi*1.7)*0.20)*asp,',
+'                   sy + cos(u_t*0.085 + fi*2.2)*0.17 + u_sc*1.1);',
+'    float r = 0.45 + 0.32*abs(sin(fi*2.9));',
+'    vec2 d = (p-c)/r;',
+'    f += exp(-dot(d,d)*2.5);',
+'  }',
+'  float T = 0.12;',
+'  float e = abs(f - T);',
+/* smoothstep siempre con edge0 < edge1: la forma invertida es indefinida en GLSL */
+'  float rimHard = 1.0 - smoothstep(0.0, 0.030, e);',
+'  float rimSoft = 1.0 - smoothstep(0.0, 0.130, e);',
+'  float inner   = smoothstep(T, T*4.0, f);',
+/* Grosor simulado de la pelicula: de ahi sale el color */
+'  float thick = f*3.4 + fbm(p*2.8 + u_t*0.07)*2.4 + length(p)*0.60 + u_t*0.02;',
+'  vec3 col = iris(thick);',
+'  vec3 outc = col*rimHard*2.4 + col*rimSoft*0.9 + col*inner*0.12;',
+'  outc += (hash(gl_FragCoord.xy + u_t) - 0.5)*0.012;',
+'  float a = clamp(max(max(outc.r,outc.g),outc.b), 0.0, 1.0);',
+'  gl_FragColor = vec4(outc, a);',
+'}'
+].join('\n');
+
+  /* Si WebGL falla, el hero NO se queda vacio: cae a un fondo CSS */
+  function fallback(msg){
+    if (msg) console.warn('[burbujas] ' + msg);
+    cv.style.display = 'none';
+    document.querySelector('.hero').classList.add('nogl');
+  }
+
+  function sh(type, s){
+    const o = gl.createShader(type);
+    gl.shaderSource(o, s); gl.compileShader(o);
+    if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) {
+      console.warn('[burbujas] error de compilacion:\n' + gl.getShaderInfoLog(o));
+      return null;
+    }
+    return o;
+  }
+  const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+  if (!vs || !fs) { fallback(); return; }
+
+  const prog = gl.createProgram();
+  gl.attachShader(prog,vs); gl.attachShader(prog,fs); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog,gl.LINK_STATUS)) {
+    fallback('no enlaza: ' + gl.getProgramInfoLog(prog)); return;
+  }
+  gl.useProgram(prog);
+  gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog,'p');
+  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+
+  const uRes = gl.getUniformLocation(prog,'u_res');
+  const uT   = gl.getUniformLocation(prog,'u_t');
+  const uM   = gl.getUniformLocation(prog,'u_m');
+  const uSc  = gl.getUniformLocation(prog,'u_sc');
+
+  let mouse=[0,0], mt=[0,0], visible=true, raf=null, ok=false;
+  addEventListener('mousemove', e => {
+    mt = [e.clientX/innerWidth - .5, .5 - e.clientY/innerHeight];
+  }, { passive:true });
+
+  const Q = CONFIG.bubbleQuality;
+  function size(){
+    /* Medimos el hero, no el canvas: si el canvas aun no tiene caja,
+       su clientWidth es 0 y el shader se quedaria sin resolucion. */
+    const host = cv.parentElement;
+    const w = cv.clientWidth  || host.clientWidth  || innerWidth;
+    const h = cv.clientHeight || host.clientHeight || innerHeight;
+    cv.width  = Math.max(1, Math.round(w * Q));
+    cv.height = Math.max(1, Math.round(h * Q));
+    gl.viewport(0,0,cv.width,cv.height);
+    gl.uniform2f(uRes, cv.width, cv.height);
+    ok = cv.width > 1 && cv.height > 1;
+  }
+  size();
+  addEventListener('resize', size);
+  if (window.ResizeObserver) new ResizeObserver(size).observe(cv);
+  /* Red de seguridad: si al cargar las fuentes el hero cambia de alto */
+  setTimeout(size, 400); setTimeout(size, 1600);
+
+  const t0 = performance.now();
+  (function draw(){
+    if (ok) {
+      mouse[0] = lerp(mouse[0], mt[0], .04);
+      mouse[1] = lerp(mouse[1], mt[1], .04);
+      gl.uniform1f(uT, (performance.now()-t0)/1000);
+      gl.uniform2f(uM, mouse[0], mouse[1]);
+      gl.uniform1f(uSc, S.current/innerHeight);
+      gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLES,0,3);
+    }
+    if (visible) raf = requestAnimationFrame(draw);
+  })();
+
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !visible) { visible = true; draw(); }
+    else if (!e.isIntersecting) { visible = false; cancelAnimationFrame(raf); }
+  }, { threshold:0 }).observe(cv);
+})();
+
+})();
+</script>
+</body>
+</html>
