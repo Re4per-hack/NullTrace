@@ -487,6 +487,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 @media (max-width:1000px){.aff{grid-template-columns:1fr}}
 
 
+/* Icono de WhatsApp en los botones que abren un chat */
+.ico-wa{flex:none;color:#25D366}
+.btn .ico-wa{color:currentColor}
+
 /* Botones de demostracion por sector */
 .demos{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
 .demo-chip{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:99px;
@@ -581,7 +585,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
           <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="btn btn--ghost" data-demo data-magnet data-cursor>Escribirle al asistente
+      <a class="btn btn--ghost" data-demo data-magnet data-cursor>Escribirle por WhatsApp
         <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
           <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -680,9 +684,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
           responder hasta el día siguiente.
         </p>
         <p class="reveal" style="--i:3;margin-top:28px;font-size:.92rem;color:var(--fg-muted)" data-anim>
-          Escríbale al asistente de demostración como si fuera un cliente.
-          Elija el tipo de negocio y le responde en ese papel, con precios y
-          agenda reales:
+          Escríbale al asistente de demostración por WhatsApp, como si fuera
+          un cliente. Elija el tipo de negocio y le responde en ese papel, con
+          precios y agenda reales:
         </p>
         <div class="demos reveal" style="--i:4" data-anim>
           <a class="demo-chip" data-cursor data-demo="Hola, quiero verlo como si fuera una peluquería canina.">Peluquería canina</a>
@@ -877,7 +881,7 @@ const CONFIG = {
      demo: el numero del bot de demostracion, sin + ni espacios
      ========================================================== */
   api: 'https://TU-SERVIDOR.up.railway.app',
-  demo: '573001234567',
+  demo: '573052755561',
 
   scrollEase: 0.085,
   skewMax: 4.5,
@@ -1104,12 +1108,17 @@ document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click'
 
 /* ---------- FORMULARIO ---------- */
 /* Botones que abren WhatsApp con el bot de demostracion */
+const ICONO_WA = '""" + "PLACEHOLDER" + """';
+
 document.querySelectorAll('[data-demo]').forEach(a => {
   const texto = encodeURIComponent(
     a.dataset.demo || 'Hola, vi la página de KlarTrace y quiero probar el asistente.');
   a.href = 'https://wa.me/' + CONFIG.demo + '?text=' + texto;
   a.target = '_blank';
   a.rel = 'noopener';
+  a.setAttribute('aria-label', 'Abrir WhatsApp');
+  /* el icono va al principio, para que se vea a que lleva antes de leer */
+  a.insertAdjacentHTML('afterbegin', ICONO_WA);
 });
 
 /* ---------- FORMULARIO ---------- */
@@ -1295,7 +1304,6 @@ form.addEventListener('submit', async ev => {
   size();
   addEventListener('resize', size);
   if (window.ResizeObserver) new ResizeObserver(size).observe(cv);
-  /* Red de seguridad: si al cargar las fuentes el hero cambia de alto */
   setTimeout(size, 400); setTimeout(size, 1600);
 
   const t0 = performance.now();
