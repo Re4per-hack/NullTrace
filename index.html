@@ -7,6 +7,75 @@
 <title>KlarTrace — Su negocio activo en WhatsApp 24/7</title>
 <meta name="description" content="Un asistente de inteligencia artificial que atiende el WhatsApp de su negocio: informa precios, agenda citas en su calendario y le avisa cuando debe intervenir. Desde $350.000 COP al mes.">
 
+<link rel="canonical" href="https://klartrace.com/">
+<meta name="robots" content="index,follow">
+<meta name="author" content="KlarTrace">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KlarTrace">
+<meta property="og:locale" content="es_CO">
+<meta property="og:url" content="https://klartrace.com/">
+<meta property="og:title" content="KlarTrace — Su negocio activo en WhatsApp 24/7">
+<meta property="og:description" content="Un asistente de inteligencia artificial que atiende el WhatsApp de su negocio: informa precios, agenda citas en su calendario y le avisa cuando debe intervenir. Desde $350.000 COP al mes.">
+<meta property="og:image" content="https://klartrace.com/portada.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KlarTrace — Su negocio activo en WhatsApp 24/7">
+<meta name="twitter:description" content="Un asistente de inteligencia artificial que atiende el WhatsApp de su negocio: informa precios, agenda citas en su calendario y le avisa cuando debe intervenir. Desde $350.000 COP al mes.">
+<meta name="twitter:image" content="https://klartrace.com/portada.jpg">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#000000">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://klartrace.com/#organizacion",
+      "name": "KlarTrace",
+      "url": "https://klartrace.com/",
+      "email": "hola@klartrace.com",
+      "description": "Asistentes de inteligencia artificial que atienden el WhatsApp de negocios en Colombia: informan precios, agendan citas y avisan al dueno cuando debe intervenir.",
+      "areaServed": { "@type": "Country", "name": "Colombia" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://klartrace.com/#sitio",
+      "url": "https://klartrace.com/",
+      "name": "KlarTrace",
+      "inLanguage": "es-CO",
+      "publisher": { "@id": "https://klartrace.com/#organizacion" }
+    },
+    {
+      "@type": "Service",
+      "name": "Asistente de WhatsApp con inteligencia artificial",
+      "provider": { "@id": "https://klartrace.com/#organizacion" },
+      "areaServed": { "@type": "Country", "name": "Colombia" },
+      "description": "Atiende el WhatsApp de su negocio las 24 horas: informa precios, resuelve dudas, agenda citas en su calendario y notifica cuando debe intervenir una persona.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Plan Basico",
+          "price": "350000",
+          "priceCurrency": "COP",
+          "description": "Atencion personalizada, respuestas a precios y dudas, agenda de citas y notificacion al chat privado del dueno."
+        },
+        {
+          "@type": "Offer",
+          "name": "Plan Pro",
+          "price": "550000",
+          "priceCurrency": "COP",
+          "description": "Todo lo del plan Basico mas notas de voz, resumen diario en audio, lectura de imagenes, generacion de documentos y recuperacion de clientes."
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style"
@@ -502,7 +571,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
           <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="#planes" class="btn btn--ghost" data-magnet data-cursor>Ver planes y precios</a>
+      <a class="btn btn--ghost" data-demo data-magnet data-cursor>Escribirle al asistente
+        <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -597,10 +669,16 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
           esa consulta termina en una cita agendada en lugar de un mensaje sin
           responder hasta el día siguiente.
         </p>
-        <a href="#contacto" class="btn reveal" style="--i:3;margin-top:28px" data-anim data-magnet data-cursor>Verlo con los datos de mi negocio
-          <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="reveal" style="--i:3;margin-top:28px;display:flex;gap:12px;flex-wrap:wrap" data-anim>
+          <a class="btn" data-demo data-magnet data-cursor>Probarlo ahora por WhatsApp
+            <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#contacto" class="btn btn--ghost" data-magnet data-cursor>Verlo con mis datos</a>
+        </div>
+        <p class="reveal" style="--i:4;margin-top:14px;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--fg-dim)" data-anim>
+          Es un despacho de ejemplo. Escríbale como si fuera un cliente.
+        </p>
       </div>
 
       <div class="term chat iris-border reveal" style="--i:2" data-anim data-skew="0.3">
@@ -751,6 +829,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <div class="field"><label for="negocio">Su negocio</label><input id="negocio" name="negocio" type="text" placeholder="Despacho, consultorio, veterinaria…"></div>
       <div class="field"><label for="email">WhatsApp o correo</label><input id="email" name="email" type="text" required autocomplete="email"></div>
       <div class="field"><label for="msg">Qué le gustaría que atendiera</label><textarea id="msg" name="mensaje"></textarea></div>
+      <input type="text" name="web" tabindex="-1" autocomplete="off" aria-hidden="true"
+             style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <button type="submit" class="btn" data-magnet data-cursor>Solicitar demostración</button>
       <p class="form__note" id="formNote">Respondemos el mismo día.</p>
     </form>
@@ -776,9 +856,13 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 'use strict';
 
 const CONFIG = {
+ 
+  api: 'https://efficient-perfection-production-2b74.up.railway.app',
+  demo: '573052755561',
+
   scrollEase: 0.085,
   skewMax: 4.5,
-  bubbleQuality: 0.55,   // resolución interna del shader (0.4–1.0)
+  bubbleQuality: 0.55,
 };
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1000,17 +1084,61 @@ toggle.addEventListener('click', () => {
 document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
 /* ---------- FORMULARIO ---------- */
+/* Botones que abren WhatsApp con el bot de demostracion */
+document.querySelectorAll('[data-demo]').forEach(a => {
+  const texto = encodeURIComponent(
+    a.dataset.demo || 'Hola, vi la página de KlarTrace y quiero probar el asistente.');
+  a.href = 'https://wa.me/' + CONFIG.demo + '?text=' + texto;
+  a.target = '_blank';
+  a.rel = 'noopener';
+});
+
+/* ---------- FORMULARIO ---------- */
 const form = document.getElementById('form'), note = document.getElementById('formNote');
-form.addEventListener('submit', ev => {
+form.addEventListener('submit', async ev => {
   ev.preventDefault();
-  const nombre = form.nombre.value.trim(), email = form.email.value.trim();
-  if (!nombre || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    note.textContent = 'Falta el nombre o el email no tiene formato válido.';
+
+  const nombre = form.nombre.value.trim();
+  const contacto = form.email.value.trim();
+
+  if (nombre.length < 2 || contacto.length < 6) {
+    note.textContent = 'Falta su nombre o un WhatsApp o correo donde escribirle.';
     note.style.color = 'var(--iris-2)'; return;
   }
-  note.textContent = 'Recibido. Te escribimos en menos de 24 horas laborables.';
-  note.style.color = 'var(--iris-4)';
-  form.reset();
+
+  const boton = form.querySelector('button[type=submit]');
+  boton.disabled = true;
+  note.textContent = 'Enviando…';
+  note.style.color = 'var(--fg-dim)';
+
+  try {
+    const r = await fetch(CONFIG.api + '/contacto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        origen: 'klartrace.com',
+        nombre,
+        contacto,
+        negocio: form.negocio ? form.negocio.value.trim() : '',
+        ciudad: form.ciudad ? form.ciudad.value.trim() : '',
+        mensaje: form.mensaje ? form.mensaje.value.trim() : '',
+        web: form.web ? form.web.value : ''
+      })
+    });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'no se pudo enviar');
+
+    note.textContent = 'Recibido. Le escribimos hoy mismo.';
+    note.style.color = 'var(--iris-4)';
+    form.reset();
+  } catch (e) {
+    note.innerHTML = 'No se pudo enviar. Escríbanos por WhatsApp: ' +
+      '<a style="color:var(--iris-4)" target="_blank" rel="noopener" href="https://wa.me/' +
+      CONFIG.demo + '">abrir chat</a>';
+    note.style.color = 'var(--iris-2)';
+  } finally {
+    boton.disabled = false;
+  }
 });
 
 /* ============================================================
