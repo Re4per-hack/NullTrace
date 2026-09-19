@@ -86,20 +86,17 @@
   href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..112,400..800&family=JetBrains+Mono:wght@400&display=swap"></noscript>
 
 <style>
-/* ============================================================
-   1. TOKENS
-   Los colores iridiscentes viven también en el shader (ver CONFIG).
-   ============================================================ */
+
 :root{
   --void:#000000;
   --surface:#0A0A0D;
   --surface-2:#101016;
   --line:#1D1D25;
 
-  --iris-1:#B14BFF;   /* violeta */
-  --iris-2:#FF3D9A;   /* magenta */
-  --iris-3:#FF7A29;   /* naranja */
-  --iris-4:#35E8E0;   /* cian    */
+  --iris-1:#B14BFF;   /*  */
+  --iris-2:#FF3D9A;   /*  */
+  --iris-3:#FF7A29;   /*  */
+  --iris-4:#35E8E0;   
 
   --fg:#FFFFFF;
   --fg-muted:#8E8E99;
@@ -166,9 +163,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .reveal.in{opacity:1;transform:none}
 [data-skew]{will-change:transform}
 
-/* ============================================================
-   2. PRELOADER
-   ============================================================ */
+
 .pre{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;background:var(--void);display:flex;
   align-items:flex-end;justify-content:space-between;padding:var(--gut);
   transition:transform 1s var(--ease-out) .2s}
@@ -181,9 +176,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   transform-origin:0 50%;
   background:linear-gradient(90deg,var(--iris-1),var(--iris-2),var(--iris-3),var(--iris-4))}
 
-/* ============================================================
-   3. CURSOR
-   ============================================================ */
+
 .cur,.cur-ring{position:fixed;top:0;left:0;z-index:150;pointer-events:none;border-radius:50%;
   transform:translate3d(-50%,-50%,0)}
 .cur{width:5px;height:5px;background:#fff}
@@ -365,6 +358,29 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 /* Precios */
 .price{background:var(--surface);border-block:1px solid var(--line)}
+
+/* ----- TIENDAS: banda aparte, para que no se confunda con servicios ----- */
+.tienda{
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(53,232,224,.10), transparent 62%),
+    linear-gradient(180deg,#07070B 0%, var(--surface-2) 45%, #07070B 100%);
+  border-block:1px solid var(--line);
+}
+.tienda .eyebrow{color:var(--iris-4)}
+.tienda .eyebrow::before{background:var(--iris-4)}
+.banda{display:flex;align-items:center;gap:18px;margin-bottom:8px}
+.banda__kicker{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--iris-4);white-space:nowrap;
+  border:1px solid rgba(53,232,224,.35);border-radius:999px;padding:7px 14px;
+}
+.banda__linea{height:1px;flex:1;background:linear-gradient(90deg,
+  rgba(53,232,224,.45), transparent)}
+.h-banda{font-weight:600;font-size:clamp(2.6rem,7.5vw,5.4rem);line-height:.9;
+  letter-spacing:-.02em}
+.tienda .plan{background:#050508}
+.tienda .plan--hero{border-color:rgba(53,232,224,.4)}
+@media(max-width:760px){.banda{gap:12px}}
 .price__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
 .plan{background:var(--void);border-radius:22px;padding:30px;display:flex;flex-direction:column;
   gap:16px;position:relative;will-change:transform}
@@ -543,6 +559,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <a href="#tiendas">Tiendas</a>
       <a href="#alta">Puesta en marcha</a>
       <a href="#planes">Planes</a>
+      <a href="#planes-tienda">Planes tienda</a>
       <a href="referidos.html">Referidos</a>
     </nav>
     <a href="#contacto" class="btn nav__cta" data-magnet data-cursor>Solicitar demostración</a>
@@ -734,28 +751,29 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 </section>
 
 <!-- PUESTA EN MARCHA -->
-<section class="sec" id="tiendas">
-  <div class="wrap sec__head">
-    <div>
-      <p class="eyebrow" data-anim>Para tiendas</p>
-      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>Si usted vende productos, toma el pedido completo</span></h2>
-    </div>
-    <p class="lede reveal" style="--i:2" data-anim>
-      No solo informa precios. Le arma a cada cliente un catálogo con sus
-      fotos y sus tallas, recibe lo que elige, le pide los datos del envío,
-      descuenta el inventario y le deja el pedido listo para despachar.
-    </p>
-  </div>
-
+<section class="sec tienda" id="tiendas">
   <div class="wrap">
-    <div class="price__grid" style="margin-top:8px">
+    <div class="banda" data-anim>
+      <span class="banda__kicker">Otra cosa distinta</span>
+      <span class="banda__linea"></span>
+    </div>
+    <h2 class="h-banda"><span class="split" data-split data-anim>Si usted vende</span><br><span class="split" data-split data-anim data-delay="220">productos, hay otro</span><br><span class="split" data-split data-anim data-delay="440">asistente para eso</span></h2>
+
+    <p class="lede reveal" style="--i:2;margin-top:34px;max-width:62ch" data-anim>
+      Lo de arriba atiende y agenda. Esto vende. Le arma a cada cliente un
+      catálogo con sus productos, recibe lo que elige, le pide los datos del
+      envío, descuenta el inventario y le deja el pedido listo para despachar.
+      Da igual qué venda: consolas, perfumes, juguetes, repuestos, ropa.
+    </p>
+
+    <div class="price__grid" style="margin-top:46px">
       <article class="plan iris-border reveal" data-anim>
         <span class="plan__name">Su catálogo, en un enlace</span>
-        <p class="plan__d">El cliente lo abre desde el chat, ve sus prendas con foto y precio, marca las que quiere con su talla y vuelve con la lista puesta. Sin aplicaciones ni registros.</p>
+        <p class="plan__d">El cliente lo abre desde el chat, ve sus productos con foto y precio, filtra por lo que busca, elige la presentación que quiera y vuelve con la lista puesta. Sin aplicaciones ni registros.</p>
       </article>
       <article class="plan iris-border reveal" style="--i:1" data-anim>
         <span class="plan__name">El pedido, armado solo</span>
-        <p class="plan__d">Confirma tallas contra el inventario real, calcula el total, pide los datos del envío en un formulario y le avisa a su chat privado en cuanto queda cerrado.</p>
+        <p class="plan__d">Comprueba contra el inventario real antes de prometer nada, calcula el total, pide los datos del envío en un formulario y le avisa a su chat privado en cuanto el pedido queda cerrado.</p>
       </article>
       <article class="plan iris-border reveal" style="--i:2" data-anim>
         <span class="plan__name">Y usted solo empaca</span>
@@ -763,10 +781,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       </article>
     </div>
 
-    <p class="note reveal" data-anim style="margin-top:28px">
-      Funciona con contraentrega y con pago anticipado. Si vende al por mayor,
-      maneja precios distintos, verifica los comprobantes con usted antes de
-      despachar y no deja cerrar un envío sin dirección.
+    <p class="note reveal" data-anim style="margin-top:34px">
+      Sirve igual si su producto tiene variantes —tallas, colores, sabores,
+      capacidades— o si cada referencia es una sola. Funciona con contraentrega
+      y con pago anticipado, maneja precios al por mayor con su propio mínimo,
+      verifica los comprobantes con usted antes de despachar, y no deja cerrar
+      un envío sin dirección.
     </p>
   </div>
 </section>
@@ -817,11 +837,15 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       y no hay que cancelar nada.
     </p>
 
-    <p class="eyebrow reveal" data-anim style="margin-top:44px">Negocios de servicios</p>
+    <div class="banda reveal" data-anim style="margin-top:56px">
+      <span class="eyebrow" style="margin:0">Negocios de servicios</span>
+      <span class="banda__linea" style="background:linear-gradient(90deg,rgba(177,75,255,.45),transparent)"></span>
+    </div>
+    <p class="plan__d" style="max-width:56ch;margin-top:10px">Consultorios, despachos, veterinarias, salones: atiende, informa y agenda.</p>
     <div class="price__grid">
       <div class="plan iris-border reveal" data-anim data-magnet="0.05">
         <span class="plan__name">Básico</span>
-        <span class="plan__p">$350.000<small>COP AL MES</small></span>
+        <span class="plan__p">$100<small>USD AL MES</small></span>
         <p class="plan__d">Todo lo necesario para que ninguna consulta se quede sin respuesta.</p>
         <ul>
           <li>Atención personalizada, con un trato cercano y cálido que se siente como hablar con alguien de su equipo</li>
@@ -836,7 +860,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <div class="plan plan--hero iris-border reveal" style="--i:1" data-anim data-magnet="0.05">
         <span class="plan__badge">MÁS COMPLETO</span>
         <span class="plan__name">Pro</span>
-        <span class="plan__p">$550.000<small>COP AL MES</small></span>
+        <span class="plan__p">$180<small>USD AL MES</small></span>
         <p class="plan__d">Para negocios cuyos clientes envían notas de voz e imágenes, y que quieren un reporte diario sin tener que leer conversaciones.</p>
         <ul>
           <li>Todo lo incluido en el plan Básico</li>
@@ -851,7 +875,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       </div>
       <div class="plan plan--once iris-border reveal" style="--i:2" data-anim data-magnet="0.05">
         <span class="plan__name">Puesta en marcha</span>
-        <span class="plan__p">$150.000<small>COP · PAGO ÚNICO</small></span>
+        <span class="plan__p">$55<small>USD · PAGO ÚNICO</small></span>
         <p class="plan__d">Se cobra una sola vez, junto con el primer mes. A partir del segundo mes solo paga la mensualidad.</p>
         <ul>
           <li>Conexión de su número de WhatsApp</li>
@@ -863,21 +887,40 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       </div>
     </div>
     <p class="note reveal" data-anim>
-      El primer pago es de <strong>$500.000 COP</strong> en el plan Básico y de <strong>$700.000 COP</strong> en el plan Pro, porque incluyen la puesta en marcha.<br>
-      A partir del segundo mes, <strong>$350.000 COP</strong> y <strong>$550.000 COP</strong> respectivamente.<br>
+      El primer pago es de <strong>$155 USD</strong> en el plan Básico y de <strong>$235 USD</strong> en el plan Pro, porque incluyen la puesta en marcha.<br>
+      A partir del segundo mes, <strong>$100 USD</strong> y <strong>$180 USD</strong> respectivamente.<br>
       Sin cláusula de permanencia: si decide retirarse, el número sigue siendo suyo.
     </p>
 
-    <p class="eyebrow reveal" data-anim style="margin-top:64px">Tiendas que venden productos</p>
+    <div class="reveal" style="margin-top:36px" data-anim>
+      <a href="referidos.html" class="btn btn--ghost" data-magnet data-cursor>¿Conoce un negocio al que le sirva? Gane con cada referido
+        <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec tienda" id="planes-tienda">
+  <div class="wrap">
+    <div class="banda" data-anim>
+      <span class="banda__kicker">Planes de tienda</span>
+      <span class="banda__linea"></span>
+    </div>
+    <h2 class="h-banda" style="margin-top:6px"><span class="split" data-split data-anim>Lo que cuesta vender</span></h2>
+    <p class="lede reveal" data-anim style="--i:2;margin-top:28px;max-width:60ch">
+      Precios distintos a los de servicios, porque el trabajo es otro: aquí hay
+      catálogo, inventario, pedidos y despachos.
+    </p>
     <div class="price__grid">
       <div class="plan iris-border reveal" data-anim data-magnet="0.05">
-        <span class="plan__name">Básico tienda</span>
-        <span class="plan__p">$450.000<small>COP AL MES</small></span>
+        <span class="plan__name">Básico</span>
+        <span class="plan__p">$150<small>USD AL MES</small></span>
         <p class="plan__d">Su catálogo en WhatsApp y el pedido tomado de principio a fin, listo para despachar.</p>
         <ul>
-          <li>Catálogo propio en un enlace, con sus fotos, precios y tallas</li>
-          <li>Toma el pedido completo: prenda, talla, cantidad y datos del envío</li>
-          <li>Confirma contra el inventario real y descuenta lo vendido, talla por talla</li>
+          <li>Catálogo propio en un enlace, con sus fotos, precios y variantes</li>
+          <li>Toma el pedido completo: producto, presentación, cantidad y datos del envío</li>
+          <li>Confirma contra el inventario real y descuenta lo vendido, variante por variante</li>
           <li>Le avisa cada pedido a su chat privado en cuanto queda cerrado</li>
           <li>Libro de ventas en su hoja de cálculo, al día y con el estado de cada pedido</li>
           <li>Hojas de envío listas para imprimir, con dirección y contenido del paquete</li>
@@ -888,14 +931,14 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       </div>
       <div class="plan plan--hero iris-border reveal" style="--i:1" data-anim data-magnet="0.05">
         <span class="plan__badge">MÁS COMPLETO</span>
-        <span class="plan__name">Pro tienda</span>
-        <span class="plan__p">$650.000<small>COP AL MES</small></span>
+        <span class="plan__name">Avanzado</span>
+        <span class="plan__p">$200<small>USD AL MES</small></span>
         <p class="plan__d">Para tiendas con volumen, clientes que mandan audios y comprobantes, y ventas al por mayor.</p>
         <ul>
-          <li>Todo lo incluido en el plan Básico tienda</li>
+          <li>Todo lo incluido en el plan Básico</li>
           <li>Escucha y responde notas de voz</li>
           <li>Lee los comprobantes de pago y se los pasa a usted para aprobar antes de despachar</li>
-          <li>Reconoce las fotos de prendas que le manda el cliente</li>
+          <li>Reconoce las fotos de productos que le manda el cliente</li>
           <li>Catálogo aparte para mayoristas, con sus propios precios y su mínimo</li>
           <li>Usted maneja la tienda desde su chat privado: pedidos, stock, hojas de envío y devoluciones</li>
           <li>Inventario en vivo en su hoja de cálculo, con aviso cuando algo se está agotando</li>
@@ -906,11 +949,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       </div>
       <div class="plan plan--once iris-border reveal" style="--i:2" data-anim data-magnet="0.05">
         <span class="plan__name">Puesta en marcha</span>
-        <span class="plan__p">$150.000<small>COP · PAGO ÚNICO</small></span>
+        <span class="plan__p">$55<small>USD · PAGO ÚNICO</small></span>
         <p class="plan__d">Se cobra una sola vez, junto con el primer mes. A partir del segundo mes solo paga la mensualidad.</p>
         <ul>
           <li>Conexión de su número de WhatsApp</li>
-          <li>Carga de su catálogo con fotos, precios y tallas</li>
+          <li>Carga de su catálogo con fotos, precios y variantes</li>
           <li>Sus hojas de ventas e inventario conectadas</li>
           <li>Ajustes hasta dejarlo vendiendo como usted quiere</li>
         </ul>
@@ -919,17 +962,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     </div>
 
     <p class="note reveal" data-anim>
-      En tiendas, el primer pago es de <strong>$600.000 COP</strong> en el plan Básico y de <strong>$800.000 COP</strong> en el plan Pro, porque incluyen la puesta en marcha.<br>
-      A partir del segundo mes, <strong>$450.000 COP</strong> y <strong>$650.000 COP</strong> respectivamente.<br>
+      El primer pago es de <strong>$205 USD</strong> en el plan Básico y de <strong>$255 USD</strong> en el Avanzado, porque incluyen la puesta en marcha.<br>
+      A partir del segundo mes, <strong>$150 USD</strong> y <strong>$200 USD</strong> respectivamente.<br>
       La semana de prueba va antes de todo esto: primero lo ve funcionando con sus productos, y después decide.
     </p>
 
-    <div class="reveal" style="margin-top:36px" data-anim>
-      <a href="referidos.html" class="btn btn--ghost" data-magnet data-cursor>¿Conoce un negocio al que le sirva? Gane con cada referido
-        <svg class="btn__arrow" width="13" height="13" viewBox="0 0 14 14" fill="none">
-          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
   </div>
 </section>
 
