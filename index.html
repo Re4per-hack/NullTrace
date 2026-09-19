@@ -86,17 +86,20 @@
   href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..112,400..800&family=JetBrains+Mono:wght@400&display=swap"></noscript>
 
 <style>
-
+/* ============================================================
+   1. TOKENS
+   Los colores iridiscentes viven también en el shader (ver CONFIG).
+   ============================================================ */
 :root{
   --void:#000000;
   --surface:#0A0A0D;
   --surface-2:#101016;
   --line:#1D1D25;
 
-  --iris-1:#B14BFF;   /*  */
-  --iris-2:#FF3D9A;   /*  */
-  --iris-3:#FF7A29;   /*  */
-  --iris-4:#35E8E0;   
+  --iris-1:#B14BFF;   /* violeta */
+  --iris-2:#FF3D9A;   /* magenta */
+  --iris-3:#FF7A29;   /* naranja */
+  --iris-4:#35E8E0;   /* cian    */
 
   --fg:#FFFFFF;
   --fg-muted:#8E8E99;
@@ -163,7 +166,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .reveal.in{opacity:1;transform:none}
 [data-skew]{will-change:transform}
 
-
+/* ============================================================
+   2. PRELOADER
+   ============================================================ */
 .pre{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;background:var(--void);display:flex;
   align-items:flex-end;justify-content:space-between;padding:var(--gut);
   transition:transform 1s var(--ease-out) .2s}
@@ -176,7 +181,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   transform-origin:0 50%;
   background:linear-gradient(90deg,var(--iris-1),var(--iris-2),var(--iris-3),var(--iris-4))}
 
-
+/* ============================================================
+   3. CURSOR
+   ============================================================ */
 .cur,.cur-ring{position:fixed;top:0;left:0;z-index:150;pointer-events:none;border-radius:50%;
   transform:translate3d(-50%,-50%,0)}
 .cur{width:5px;height:5px;background:#fff}
@@ -754,39 +761,39 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec tienda" id="tiendas">
   <div class="wrap">
     <div class="banda" data-anim>
-      <span class="banda__kicker">Otra cosa distinta</span>
+      <span class="banda__kicker">Venta de productos</span>
       <span class="banda__linea"></span>
     </div>
-    <h2 class="h-banda"><span class="split" data-split data-anim>Si usted vende</span><br><span class="split" data-split data-anim data-delay="220">productos, hay otro</span><br><span class="split" data-split data-anim data-delay="440">asistente para eso</span></h2>
+    <h2 class="h-banda" style="margin-top:6px"><span class="split" data-split data-anim>Un asistente</span><br><span class="split" data-split data-anim data-delay="220">para negocios</span><br><span class="split" data-split data-anim data-delay="440">que venden productos</span></h2>
 
     <p class="lede reveal" style="--i:2;margin-top:34px;max-width:62ch" data-anim>
-      Lo de arriba atiende y agenda. Esto vende. Le arma a cada cliente un
-      catálogo con sus productos, recibe lo que elige, le pide los datos del
-      envío, descuenta el inventario y le deja el pedido listo para despachar.
-      Da igual qué venda: consolas, perfumes, juguetes, repuestos, ropa.
+      Gestiona la venta completa: presenta su catálogo, recibe el pedido,
+      solicita los datos de envío, descuenta el inventario y se lo entrega
+      listo para despachar. Funciona con cualquier tipo de producto, desde
+      tecnología y perfumería hasta repuestos, juguetería o confección.
     </p>
 
     <div class="price__grid" style="margin-top:46px">
       <article class="plan iris-border reveal" data-anim>
-        <span class="plan__name">Su catálogo, en un enlace</span>
-        <p class="plan__d">El cliente lo abre desde el chat, ve sus productos con foto y precio, filtra por lo que busca, elige la presentación que quiera y vuelve con la lista puesta. Sin aplicaciones ni registros.</p>
+        <span class="plan__name">Catálogo propio</span>
+        <p class="plan__d">Su cliente lo abre desde la conversación, consulta los productos con foto y precio, filtra por lo que busca, selecciona la presentación que necesita y regresa con su pedido definido. Sin aplicaciones ni registros.</p>
       </article>
       <article class="plan iris-border reveal" style="--i:1" data-anim>
-        <span class="plan__name">El pedido, armado solo</span>
-        <p class="plan__d">Comprueba contra el inventario real antes de prometer nada, calcula el total, pide los datos del envío en un formulario y le avisa a su chat privado en cuanto el pedido queda cerrado.</p>
+        <span class="plan__name">Pedido completo</span>
+        <p class="plan__d">Verifica la disponibilidad real antes de comprometer un producto, calcula el total, solicita los datos de envío en un formulario y le notifica a su chat privado en cuanto el pedido queda cerrado.</p>
       </article>
       <article class="plan iris-border reveal" style="--i:2" data-anim>
-        <span class="plan__name">Y usted solo empaca</span>
-        <p class="plan__d">Las hojas de envío salen impresas con la dirección y lo que va en cada paquete. El libro de ventas y el inventario se actualizan solos en sus hojas de cálculo.</p>
+        <span class="plan__name">Listo para despachar</span>
+        <p class="plan__d">Las hojas de envío se generan con la dirección y el contenido de cada paquete. El libro de ventas y el inventario se mantienen actualizados en sus hojas de cálculo.</p>
       </article>
     </div>
 
     <p class="note reveal" data-anim style="margin-top:34px">
-      Sirve igual si su producto tiene variantes —tallas, colores, sabores,
-      capacidades— o si cada referencia es una sola. Funciona con contraentrega
-      y con pago anticipado, maneja precios al por mayor con su propio mínimo,
-      verifica los comprobantes con usted antes de despachar, y no deja cerrar
-      un envío sin dirección.
+      Contempla productos con variantes —tallas, colores, sabores,
+      capacidades— y productos de referencia única. Admite contraentrega y
+      pago anticipado, gestiona precios mayoristas con su propio mínimo,
+      somete los comprobantes a su aprobación antes de despachar y no permite
+      cerrar un envío sin dirección.
     </p>
   </div>
 </section>
@@ -832,16 +839,16 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>Precios claros, sin letra pequeña</span></h2>
 
     <p class="lede reveal" data-anim style="margin-top:26px">
-      <strong>Una semana de prueba gratuita, sin compromiso.</strong> Lo
-      dejamos atendiendo su WhatsApp siete días. Si no le sirve, no paga nada
-      y no hay que cancelar nada.
+      <strong>Una semana de prueba gratuita, sin compromiso.</strong> El
+      asistente queda operando en su WhatsApp durante siete días. Si al
+      término del periodo decide no continuar, no se genera ningún cobro.
     </p>
 
     <div class="banda reveal" data-anim style="margin-top:56px">
       <span class="eyebrow" style="margin:0">Negocios de servicios</span>
       <span class="banda__linea" style="background:linear-gradient(90deg,rgba(177,75,255,.45),transparent)"></span>
     </div>
-    <p class="plan__d" style="max-width:56ch;margin-top:10px">Consultorios, despachos, veterinarias, salones: atiende, informa y agenda.</p>
+    <p class="plan__d" style="max-width:56ch;margin-top:10px">Consultorios, despachos, veterinarias y salones: atención, información y agendamiento.</p>
     <div class="price__grid">
       <div class="plan iris-border reveal" data-anim data-magnet="0.05">
         <span class="plan__name">Básico</span>
@@ -904,28 +911,28 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec tienda" id="planes-tienda">
   <div class="wrap">
     <div class="banda" data-anim>
-      <span class="banda__kicker">Planes de tienda</span>
+      <span class="banda__kicker">Planes</span>
       <span class="banda__linea"></span>
     </div>
-    <h2 class="h-banda" style="margin-top:6px"><span class="split" data-split data-anim>Lo que cuesta vender</span></h2>
+    <h2 class="h-banda" style="margin-top:6px"><span class="split" data-split data-anim>Planes para tiendas</span></h2>
     <p class="lede reveal" data-anim style="--i:2;margin-top:28px;max-width:60ch">
-      Precios distintos a los de servicios, porque el trabajo es otro: aquí hay
-      catálogo, inventario, pedidos y despachos.
+      Tarifas independientes de las de servicios: el alcance es distinto, e
+      incluye catálogo, control de inventario, gestión de pedidos y despachos.
     </p>
     <div class="price__grid">
       <div class="plan iris-border reveal" data-anim data-magnet="0.05">
         <span class="plan__name">Básico</span>
         <span class="plan__p">$150<small>USD AL MES</small></span>
-        <p class="plan__d">Su catálogo en WhatsApp y el pedido tomado de principio a fin, listo para despachar.</p>
+        <p class="plan__d">El catálogo y la gestión completa del pedido, desde la consulta hasta el despacho.</p>
         <ul>
           <li>Catálogo propio en un enlace, con sus fotos, precios y variantes</li>
-          <li>Toma el pedido completo: producto, presentación, cantidad y datos del envío</li>
+          <li>Registra el pedido completo: producto, presentación, cantidad y datos de envío</li>
           <li>Confirma contra el inventario real y descuenta lo vendido, variante por variante</li>
-          <li>Le avisa cada pedido a su chat privado en cuanto queda cerrado</li>
-          <li>Libro de ventas en su hoja de cálculo, al día y con el estado de cada pedido</li>
-          <li>Hojas de envío listas para imprimir, con dirección y contenido del paquete</li>
-          <li>Contraentrega o pago anticipado, como trabaje su tienda</li>
-          <li>Lo llama cuando hay un reclamo o algo que decide usted</li>
+          <li>Le notifica cada pedido a su chat privado en cuanto queda cerrado</li>
+          <li>Libro de ventas actualizado en su hoja de cálculo, con el estado de cada pedido</li>
+          <li>Hojas de envío listas para imprimir, con dirección y contenido de cada paquete</li>
+          <li>Contraentrega o pago anticipado, según la modalidad de su negocio</li>
+          <li>Le traslada los reclamos y las decisiones que le corresponden a usted</li>
         </ul>
         <a href="#contacto" class="btn btn--ghost" data-cursor>Solicitar</a>
       </div>
@@ -933,17 +940,17 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <span class="plan__badge">MÁS COMPLETO</span>
         <span class="plan__name">Avanzado</span>
         <span class="plan__p">$200<small>USD AL MES</small></span>
-        <p class="plan__d">Para tiendas con volumen, clientes que mandan audios y comprobantes, y ventas al por mayor.</p>
+        <p class="plan__d">Para operaciones con mayor volumen, clientes que envían audios y comprobantes, y venta mayorista.</p>
         <ul>
           <li>Todo lo incluido en el plan Básico</li>
           <li>Escucha y responde notas de voz</li>
-          <li>Lee los comprobantes de pago y se los pasa a usted para aprobar antes de despachar</li>
+          <li>Lee los comprobantes de pago y los somete a su aprobación antes del despacho</li>
           <li>Reconoce las fotos de productos que le manda el cliente</li>
-          <li>Catálogo aparte para mayoristas, con sus propios precios y su mínimo</li>
-          <li>Usted maneja la tienda desde su chat privado: pedidos, stock, hojas de envío y devoluciones</li>
-          <li>Inventario en vivo en su hoja de cálculo, con aviso cuando algo se está agotando</li>
-          <li>Resumen del día y recuperación de los clientes que quedaron a medias</li>
-          <li>Cada comprador queda guardado en los contactos de su tienda</li>
+          <li>Catálogo independiente para mayoristas, con precios y mínimo propios</li>
+          <li>Gestión desde su chat privado: pedidos, inventario, hojas de envío y devoluciones</li>
+          <li>Inventario actualizado en su hoja de cálculo, con alerta de existencias bajas</li>
+          <li>Resumen diario y recuperación de las conversaciones sin cerrar</li>
+          <li>Cada comprador queda registrado en los contactos de su negocio</li>
         </ul>
         <a href="#contacto" class="btn" data-cursor>Solicitar</a>
       </div>
@@ -954,8 +961,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <ul>
           <li>Conexión de su número de WhatsApp</li>
           <li>Carga de su catálogo con fotos, precios y variantes</li>
-          <li>Sus hojas de ventas e inventario conectadas</li>
-          <li>Ajustes hasta dejarlo vendiendo como usted quiere</li>
+          <li>Integración de sus hojas de ventas e inventario</li>
+          <li>Ajustes hasta dejarlo operando conforme a su forma de vender</li>
         </ul>
         <a href="#contacto" class="btn btn--ghost" data-cursor>Agendar llamada</a>
       </div>
@@ -964,7 +971,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <p class="note reveal" data-anim>
       El primer pago es de <strong>$205 USD</strong> en el plan Básico y de <strong>$255 USD</strong> en el Avanzado, porque incluyen la puesta en marcha.<br>
       A partir del segundo mes, <strong>$150 USD</strong> y <strong>$200 USD</strong> respectivamente.<br>
-      La semana de prueba va antes de todo esto: primero lo ve funcionando con sus productos, y después decide.
+      La semana de prueba es previa a cualquier cobro: primero lo ve operando con sus productos y después decide.
     </p>
 
   </div>
