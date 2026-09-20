@@ -563,6 +563,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <nav class="nav__links pill" id="navLinks">
       <a href="#que-hace">Qué hace</a>
       <a href="#conversacion">Conversación</a>
+      <a href="#cualquier">Su negocio</a>
       <a href="#tiendas">Tiendas</a>
       <a href="#alta">Puesta en marcha</a>
       <a href="#planes">Planes</a>
@@ -642,8 +643,56 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <span class="marq__item">Restaurantes</span>
     <span class="marq__item">Fotógrafos</span>
     <span class="marq__item">Constructoras</span>
+    <span class="marq__item">Tiendas de ropa</span>
+    <span class="marq__item">Tecnología y videojuegos</span>
+    <span class="marq__item">Perfumerías</span>
+    <span class="marq__item">Jugueterías</span>
+    <span class="marq__item">Repuestos</span>
+    <span class="marq__item">Ferreterías</span>
+    <span class="marq__item">Papelerías</span>
+    <span class="marq__item">Distribuidoras</span>
+    <span class="marq__item">Y cualquier negocio que atienda por WhatsApp</span>
   </div>
 </div>
+
+<section class="sec" id="cualquier">
+  <div class="wrap sec__head">
+    <div>
+      <p class="eyebrow" data-anim>Su negocio</p>
+      <h2 class="h-lg" style="margin-top:18px"><span class="split" data-split data-anim>No hay una lista de negocios admitidos</span></h2>
+    </div>
+    <p class="lede reveal" style="--i:2" data-anim>
+      Los nombres de arriba son ejemplos de quienes ya lo usan, no un
+      catálogo de sectores. El asistente no viene hecho: se arma con su
+      información, y eso es igual de viable en una notaría que en una tienda
+      de repuestos.
+    </p>
+  </div>
+
+  <div class="wrap">
+    <div class="price__grid" style="margin-top:8px">
+      <article class="plan iris-border reveal" data-anim>
+        <span class="plan__name">Lo que cambia es su información</span>
+        <p class="plan__d">Sus servicios o sus productos, sus precios, sus horarios, sus formas de pago y sus reglas. Eso es lo que el asistente aprende, y es distinto en cada negocio aunque dos sean del mismo rubro.</p>
+      </article>
+      <article class="plan iris-border reveal" style="--i:1" data-anim>
+        <span class="plan__name">Lo que no cambia es el trabajo</span>
+        <p class="plan__d">Responder lo mismo cien veces, cotizar, tomar datos, agendar, confirmar. Ese trabajo es el mismo en un consultorio y en una distribuidora, y es el que se resuelve.</p>
+      </article>
+      <article class="plan iris-border reveal" style="--i:2" data-anim>
+        <span class="plan__name">La pregunta útil</span>
+        <p class="plan__d">No es a qué se dedica su negocio, sino qué necesita: informar y agendar, o vender y despachar. Con eso definimos cuál de los dos asistentes le sirve.</p>
+      </article>
+    </div>
+
+    <p class="note reveal" data-anim style="margin-top:28px">
+      Si no está seguro de cuál es su caso, escríbanos y se lo decimos sin
+      compromiso. Si el asistente no le sirve a su negocio, se lo decimos
+      también.
+    </p>
+  </div>
+</section>
+
 
 <!-- QUÉ HACE -->
 <section class="sec" id="que-hace">
@@ -713,8 +762,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         </p>
         <p class="reveal" style="--i:3;margin-top:28px;font-size:.92rem;color:var(--fg-muted)" data-anim>
           Escríbale al asistente de demostración por WhatsApp, como si fuera
-          un cliente. Elija el tipo de negocio y le responde en ese papel, con
-          precios y agenda reales:
+          un cliente. Estos son solo ejemplos para que lo vea funcionando: el
+          asistente se arma con el catálogo, los precios y las reglas de cada
+          negocio. Si el suyo no aparece, dígaselo y adopta ese papel:
         </p>
         <div class="demos reveal" style="--i:4" data-anim>
           <a class="demo-chip" data-cursor data-demo="Hola, quiero verlo como si fuera una peluquería canina.">Peluquería canina</a>
@@ -722,6 +772,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
           <a class="demo-chip" data-cursor data-demo="Hola, quiero verlo como si fuera un consultorio odontológico.">Consultorio odontológico</a>
           <a class="demo-chip" data-cursor data-demo="Hola, quiero verlo como si fuera un salón de belleza.">Salón de belleza</a>
           <a class="demo-chip" data-cursor data-demo="Hola, quiero verlo como si fuera un taller de carros.">Taller de carros</a>
+          <a class="demo-chip" data-cursor data-demo="Hola, quiero verlo como si fuera una tienda de ropa.">Tienda de ropa</a>
+          <a class="demo-chip" data-cursor data-demo="Hola, quiero verlo como si fuera una tienda de tecnología y videojuegos.">Tecnología</a>
+          <a class="demo-chip" data-cursor data-demo="Hola, mi negocio no está en la lista. Quiero verlo con el mío: le cuento de qué se trata.">El mío no está aquí</a>
         </div>
         <div class="reveal" style="--i:5;margin-top:22px" data-anim>
           <a href="#contacto" class="btn btn--ghost" data-magnet data-cursor>Prefiero verlo con los datos de mi negocio</a>
@@ -848,7 +901,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <span class="eyebrow" style="margin:0">Negocios de servicios</span>
       <span class="banda__linea" style="background:linear-gradient(90deg,rgba(177,75,255,.45),transparent)"></span>
     </div>
-    <p class="plan__d" style="max-width:56ch;margin-top:10px">Consultorios, despachos, veterinarias y salones: atención, información y agendamiento.</p>
+    <p class="plan__d" style="max-width:56ch;margin-top:10px">Para negocios que atienden, informan y agendan. Los ejemplos habituales son consultorios, despachos, veterinarias o salones, pero la lista no es cerrada.</p>
     <div class="price__grid">
       <div class="plan iris-border reveal" data-anim data-magnet="0.05">
         <span class="plan__name">Básico</span>
